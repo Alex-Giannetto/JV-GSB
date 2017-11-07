@@ -21,7 +21,7 @@
 		<a class="navbar-brand" href="index.php">
 			<table>
 				<td><div class="kiwi"></div></td>
-				<td>Galaxy Swiss Bourdin</td>
+				<td>Galaxy Swiss Bourdind</td>
 			</table>
 			
 		</a>
