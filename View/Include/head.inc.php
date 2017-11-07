@@ -3,7 +3,7 @@
 <head>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
-	<title>Discographie</title>
+	<title>Galaxy Swiss Bourdin</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -11,7 +11,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/myStyle.css">
+	<link rel="stylesheet" href="css/style.css">
 
 
 </head>
@@ -31,28 +31,19 @@
 		
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Artistes</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="index.php?uc=Artistes&action=all">Liste des artistes</a>
-						<a class="dropdown-item" href="index.php?uc=Artistes&action=search">Rechercher un artiste</a>
-					</div>
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?uc=visite">Visite</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Médicament</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Médecin</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Visiteur</a>
 				</li>
 				
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Albums</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="index.php?uc=Albums&action=all">Liste des album</a>
-						<a class="dropdown-item" href="index.php?uc=Albums&action=search">Rechercher un album</a>
-					</div>
-				</li>
-				
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Genre</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown01">
-						<a class="dropdown-item" href="index.php?uc=Genres&action=all">Liste des genres</a>
-					</div>
-				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<?php if(!isset($_SESSION['user']))
