@@ -54,17 +54,18 @@ h1{
 	background-color : #22303D !important;
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.19), 0 10px 10px rgba(0, 0, 0, 0.23);
 }
-.navbar .btn{
+.navbar .btn, .btn-primary{
 	margin: 0;
-	background-color : #79ABDB !important;
+	background-color : #D6789A  !important;
+	border: none;
 	color : #FFF;
 }
-.navbar .btn:hover{
-	background-color : #468FDB !important;
+.navbar .btn:hover, .btn-primary:hover{
+	background-color : #4D97AA !important;
 }
 
 .head{
-	background-color: red;
+	background-image: url(https://images.alphacoders.com/458/458169.jpg);
 	height: 20vw;
 	width: 100%;
 	z-index: -20;
