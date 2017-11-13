@@ -1,0 +1,17 @@
+.wrapper{
+    display               : grid;
+    grid-template-columns : 1fr 1fr;
+    grid-gap              : 1em;
+}
+.displayTrue{
+    display : inherit;
+}
+.displayFalse{
+    display : none;
+}
+
+.input_fields_wrap{
+    display               : grid;
+    grid-template-columns : 1fr 4fr 2fr;
+    grid-gap              : 0.5em;
+}

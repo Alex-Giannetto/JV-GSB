@@ -84,8 +84,7 @@ entete("Ajouter une visite");
 
 
 					<div class="input_fields_wrap" >
-						<button class="add_field_button btn btn-light" style="background-color: #3665b6; color: white">+</button>
-
+						<button class="add_field_button btn btn-light" style="background-color: #3665b6; color: white">+</button><!--				À rendre propre !!!!!!!!!!!         -->
 						<select name="pdt1" style="width: 100%" class="custom-select">
 							<option value="" disabled selected hidden>Produit…</option>
 						</select>
