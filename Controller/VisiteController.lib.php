@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="css/visite.css">
 <?php
 /*
  * Created by PhpStorm.
@@ -12,9 +13,10 @@ switch ($action){
 	case "ajouter":
 		//variable
 		$medecins = MedecinManager::getLstMedecin();
-		$produit =
+		$produits = ProduitManager::getLstProduit();
+		$title = "Ajouter une visite";
 		//inclusion de la page d'affichage
-		require "View/Visite/ajouterVisite.inc.php";
+		require "View/Visite/FormulaireVisite.inc.php";
 		break;
 	
 	default:
