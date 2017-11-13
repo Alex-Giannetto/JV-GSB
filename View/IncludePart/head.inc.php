@@ -29,7 +29,7 @@
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="index.php?uc=visite">Visite</a>
+					<a class="nav-link" href="index.php?uc=visite">Rapport de visite</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link disabled" href="#">Médicament</a>

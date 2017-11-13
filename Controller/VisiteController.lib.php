@@ -12,7 +12,7 @@ switch ($action){
 	case "ajouter":
 		//variable
 		$medecins = MedecinManager::getLstMedecin();
-
+		$produit =
 		//inclusion de la page d'affichage
 		require "View/Visite/ajouterVisite.inc.php";
 		break;

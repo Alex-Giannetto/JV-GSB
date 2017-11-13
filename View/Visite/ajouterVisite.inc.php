@@ -4,7 +4,9 @@ entete("Ajouter une visite");
 
 
 <div class="container firstContainer">
+
 	<div class="row">
+
 		<div class=" col-lg-3"></div>
 		<div class=" col-lg-6 bloc">
 			<form method='post' action='index.php?uc=Albums&action=ajouter'>
@@ -18,9 +20,9 @@ entete("Ajouter une visite");
 					<div class="col-md-6 margin-bottom-2">
 						<select name="medecin"  class='custom-select w-100' required>
 							<option value="" disabled selected hidden>Médecin…</option>
-							<?php foreach ($medecins as $medecin): ?>
+							<?php foreach ($medecins as $medecin){ ?>
 								<option value="<?php echo $medecin->getPraCode(); ?>"><?php echo $medecin->getPraNom()." - ".$medecin->getPraPrenom() ; ?></option>
-							<?php endforeach; ?>
+							<?php } ?>
 						</select>
 					</div>
 					<div class="col-md-6 margin-bottom-2">
@@ -35,10 +37,11 @@ entete("Ajouter une visite");
 					</div>
 					<div class="col-md-6 margin-bottom-2">
 						<select name="remplacant"  class='custom-select w-100' required>
-							<option value="" disabled selected hidden>Remplaçant…</option>
-							<?php foreach ($medecins as $medecin): ?>
+							<option value="" hidden disabled selected >Remplaçant…</option>
+							<option value="-1" >Pas de remplaçant</option>
+							<?php foreach ($medecins as $medecin){?>
 								<option value="<?php echo $medecin->getPraCode(); ?>"><?php echo $medecin->getPraNom()." - ".$medecin->getPraPrenom() ; ?></option>
-							<?php endforeach; ?>
+							<?php } ?>
 						</select>
 					</div>
 					<div class="col-md-6 margin-bottom-2">
@@ -81,7 +84,7 @@ entete("Ajouter une visite");
 
 
 					<div class="input_fields_wrap" >
-						<button class="add_field_button btn btn-outline-primary">+</button>
+						<button class="add_field_button btn btn-light" style="background-color: #3665b6; color: white">+</button>
 
 						<select name="pdt1" style="width: 100%" class="custom-select">
 							<option value="" disabled selected hidden>Produit…</option>
@@ -120,7 +123,6 @@ entete("Ajouter une visite");
         }
     });
 
-
     $('#motif').change(function(e){
         e.preventDefault();
         if( $('#motif').val() == 'AUT'){
@@ -130,23 +132,24 @@ entete("Ajouter une visite");
         }
     });
 
-
-
     $(document).ready(function() {
         var wrapper         = $("#echantillon"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
+        var x = 2;
 
-        var x = 1;
         $(add_button).click(function(e){
             e.preventDefault();
-	        x++;
-	        $(wrapper).append('<div class="input_fields_wrap"> <a href="#" class="remove_field"><button class="add_field_button btn btn-outline-primary">-</button></a> <select name="pdt1" style="width: 100%" class="custom-select"> <option value="" disabled selected hidden>Produit…</option> </select> <input type="number" class="form-control" name="qte'+ x +'" placeholder="Qte"></div>');
-            document.getElementById("echantillonNbr").value = x;
-
+	        if(x <= 10) {
+                $(wrapper).append('<div class="input_fields_wrap"> <a href="#" class="remove_field"><button class="add_field_button btn btn-outline-primary">-</button></a> <select name="pdt1" style="width: 100%" class="custom-select"> <option value="" disabled selected hidden>Produit…</option> </select> <input type="number" class="form-control" name="qte' + x + '" placeholder="Qte"></div>');
+                document.getElementById("echantillonNbr").value = x;
+                x++;
+            }
         });
 
         $(wrapper).on("click",".remove_field", function(e){
-            e.preventDefault(); $(this).parent('div').remove(); x--;
+            e.preventDefault(); $(this).parent('div').remove();
+            x--;
+            document.getElementById("echantillonNbr").value = x;
         })
     });
 </script>
