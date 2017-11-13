@@ -7,21 +7,22 @@
  */
 class Medecin
 {
-	protected $praCode, $praNom;
+	protected $praCode, $praNom, $praPrenom;
 
 	/**
 	 * Medecin constructor.
 	 * @param $praCode
 	 * @param $praNom
 	 */
-	public function __construct($praCode, $praNom)
+	public function __construct()
 	{
-		$this->praCode = $praCode;
-		$this->praNom = $praNom;
+
 	}
 
-	public function Medecin(){
-
+	public function Medecin($code, $nom, $prenom){
+		$this->setPraCode($code);
+		$this->setPraNom($nom);
+		$this->setPraPrenom($prenom);
 	}
 
 	/**
@@ -55,6 +56,23 @@ class Medecin
 	{
 		$this->praNom = $praNom;
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPraPrenom()
+	{
+		return $this->praPrenom;
+	}
+
+	/**
+	 * @param mixed $praPrenom
+	 */
+	public function setPraPrenom($praPrenom)
+	{
+		$this->praPrenom = $praPrenom;
+	}
+
 
 
 }

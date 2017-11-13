@@ -10,10 +10,11 @@ $action = (isset($_REQUEST['action']))? $_REQUEST['action'] : "";
 
 switch ($action){
 	case "ajouter":
+		//variable
+		$medecins = MedecinManager::getLstMedecin();
+
 		//inclusion de la page d'affichage
 		require "View/Visite/ajouterVisite.inc.php";
-		//inclusion des scripts
-		
 		break;
 	
 	default:

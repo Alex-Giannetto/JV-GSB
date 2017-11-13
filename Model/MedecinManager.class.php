@@ -9,6 +9,8 @@
 class  MedecinManager
 {
 	public static function getLstMedecin(){
-
+		$query = MonPdo::getInstance()->query('SELECT * FROM praticien');
+		return $query->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Medecin');
 	}
+
 }

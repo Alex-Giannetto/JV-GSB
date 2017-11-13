@@ -1,6 +1,6 @@
 <?php
 function chargerClasse($classe){
-	require 'Modele/'.$classe . '.php';
+	require 'Model/'.$classe . '.class.php';
 }
 spl_autoload_register('chargerClasse');
 
@@ -24,6 +24,8 @@ switch ($uc){
 		break;
 		
 }
+
+
 
 require  "View/IncludePart/footer.inc.php";
 ?>

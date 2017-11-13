@@ -18,7 +18,9 @@ entete("Ajouter une visite");
 					<div class="col-md-6 margin-bottom-2">
 						<select name="medecin"  class='custom-select w-100' required>
 							<option value="" disabled selected hidden>Médecin…</option>
-
+							<?php foreach ($medecins as $medecin): ?>
+								<option value="<?php echo $medecin->getPraCode(); ?>"><?php echo $medecin->getPraNom()." - ".$medecin->getPraPrenom() ; ?></option>
+							<?php endforeach; ?>
 						</select>
 					</div>
 					<div class="col-md-6 margin-bottom-2">
@@ -34,6 +36,9 @@ entete("Ajouter une visite");
 					<div class="col-md-6 margin-bottom-2">
 						<select name="remplacant"  class='custom-select w-100' required>
 							<option value="" disabled selected hidden>Remplaçant…</option>
+							<?php foreach ($medecins as $medecin): ?>
+								<option value="<?php echo $medecin->getPraCode(); ?>"><?php echo $medecin->getPraNom()." - ".$medecin->getPraPrenom() ; ?></option>
+							<?php endforeach; ?>
 						</select>
 					</div>
 					<div class="col-md-6 margin-bottom-2">
