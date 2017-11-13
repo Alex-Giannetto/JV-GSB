@@ -1,4 +1,13 @@
 <?php
+function chargerClasse($classe){
+	require 'Modele/'.$classe . '.php';
+}
+spl_autoload_register('chargerClasse');
+
+session_start();
+
+$pdo = MonPdo::getInstance();
+
 require "View/IncludePart/head.inc.php";
 
 require_once "Script/function.lib.php";
