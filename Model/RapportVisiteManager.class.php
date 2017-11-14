@@ -8,5 +8,7 @@
  */
 class RapportVisiteManager
 {
+	public static function addRapport(RapportVisite $rapport){
 
+	}
 }
