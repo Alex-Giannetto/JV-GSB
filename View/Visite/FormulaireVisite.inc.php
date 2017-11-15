@@ -25,15 +25,13 @@
 					<div class="col-md-6 margin-bottom-2">
 						<select name="motif" id='motif' class='custom-select w-100' required>
 							<?php if(isset($data['medecin'])){ ?>
-								<option SELECTED value="<?php echo $data['motif'] ?>"><?php echo $data['motif'] ?></option>
+								<option SELECTED value="<?php echo $data['motif'] ?>"><?php echo fonctions::getLstMotif()[$data['motif']]; ?></option>
 							<?php } else {?>
 								<option value="" disabled selected hidden>Motif…</option>
+							<?php }
+							foreach (fonctions::getLstMotif() as $key => $value){ ?>
+								<option value="<?php echo $key;?>"><?php echo $value;?></option>
 							<?php } ?>
-							<option value="PRD">Périodicité</option>
-							<option value="ACT">Actualisation</option>
-							<option value="REL">Relance</option>
-							<option value="SOL">Sollicitation praticien</option>
-							<option value="AUT">Autre</option>
 						</select>
 					</div>
 					<div class="col-md-6 margin-bottom-2">
@@ -64,7 +62,7 @@
 					<div class="col-md-6 margin-bottom-2">
 						<select name="firstProduit"  class='custom-select w-100' required>
 							<?php if(isset($data['medecin'])){ ?>
-								<option SELECTED value="<?php echo $data['firstProduit'] ?>"><?php echo $data['firstProduit'] ?></option>
+								<option SELECTED value="<?php echo $data['firstProduit'] ?>"><?php echo ProduitManager::getProduitById($data['firstProduit'])->getLibelle();?></option>
 							<?php } else {?>
 								<option value="" disabled selected hidden>Produit n°1…</option>
 							<?php }
@@ -76,7 +74,7 @@
 					<div class="col-md-6 margin-bottom-2">
 						<select name="secondProduit"  class='custom-select w-100' required>
 							<?php if(isset($data['medecin'])){ ?>
-								<option SELECTED value="<?php echo $data['secondProduit'] ?>"><?php echo $data['secondProduit'] ?></option>
+								<option SELECTED value="<?php echo $data['secondProduit'] ?>"><?php echo ProduitManager::getProduitById($data['secondProduit'])->getLibelle();?></option>
 							<?php } else {?>
 								<option value="" disabled selected hidden>Produit n°2…</option>
 							<?php } ?>
@@ -91,7 +89,6 @@
 							<table>
 								<td>
 									<input type="checkbox" value="1" id='doc' <?php if(isset($data['doc'])) { echo "checked"; } ?> name='doc'>
-
 								</td>
 								<td><label for='doc'>Documentation</label></td>
 							</table>
@@ -105,25 +102,45 @@
 					<div class="input_fields_wrap" >
 						<button class="add_field_button btn btn-light" style="background-color: #3665b6; color: white">+</button><!--				À rendre propre !!!!!!!!!!!         -->
 						<select name="pdt1" style="width: 100%" class="custom-select">
-							<option value="" disabled selected hidden>Produit…</option>
+							<?php if(isset($data['echantillons'][0])){?>
+								<option value="<?php echo $data['echantillons'][0]['medDepotLegal'];?>"selected><?php echo ProduitManager::getProduitById($data['echantillons'][0]['medDepotLegal'])->getLibelle();?></option>
+							<?php } else { ?>
+								<option value="" disabled selected hidden>Produit…</option>
+							<?php }
+							foreach ($produits as $produit){ ?>
+								<option value="<?php echo $produit->getMedDepotLegal(); ?>"><?php echo $produit->getLibelle() ; ?></option>
+							<?php } ?>
 						</select>
-
-						<input type="number" class="form-control text-center" name="qte1" placeholder="Qte">
+						<input type="number" class="form-control text-center" name="qte1" placeholder="Qte" <?php if(isset($data['echantillons'][0]['quantite'])) { echo "value='".(int)$data['echantillons'][0]['quantite']."'"; } ?>>
 					</div>
+					<?php
+					if(isset($data['echantillons'])) {
+						for ($i = 1; $i <= count($data['echantillons'])-1; $i++) {
+							?>
+							<div class="input_fields_wrap" >
+								<a href="#" class="remove_field"><button class="add_field_button btn btn-outline-primary">-</button></a>
+								<select name="pdt<?php echo $i + 1 ?>" style="width: 100%" class="custom-select">
+									<option value="<?php echo $data['echantillons'][$i]['medDepotLegal'];?>"selected><?php echo ProduitManager::getProduitById($data['echantillons'][$i]['medDepotLegal'])->getLibelle();?></option>
+									<?php foreach ($produits as $produit){ ?>
+										<option value="<?php echo $produit->getMedDepotLegal(); ?>"><?php echo $produit->getLibelle() ; ?></option>
+									<?php } ?>
+								</select>
+								<input type="number" class="form-control text-center" name="qte<?php echo $i + 1 ?>" placeholder="Qte" <?php if(isset($data['echantillons'][$i]['quantite'])) { echo "value='".(int)$data['echantillons'][$i]['quantite']."'"; } ?>>
+							</div>
+							<?php
+						}
+					}
+					?>
 				</div>
 				<div class="form-group text-center ">
 					<br> <!-- À ameliorer  -->
 					<input type="submit" class='btn btn-primary' name='ajouter' value='Ajouter'>
 				</div>
-
-				<input type="hidden" id="echantillonNbr" name="echantillonNbr" value="1">
 			</form>
 
 		</div>
 	</div>
 </div>
-
-
 
 <script>
 
@@ -142,30 +159,39 @@
     $('#motif').change(function(e){
         e.preventDefault();
         if( $('#motif').val() == 'AUT'){
-	        $('#autre').addClass('displayTrue').removeClass('displayFalse');
+            $('#autre').addClass('displayTrue').removeClass('displayFalse');
         }else{
             $('#autre').addClass('displayFalse').removeClass('displayTrue');
         }
     });
 
     $(document).ready(function() {
-        var wrapper         = $("#echantillon"); //Fields wrapper
-        var add_button      = $(".add_field_button"); //Add button ID
-        var x = 2;
+        var wrapper    = $("#echantillon"); //Fields wrapper
+        var add_button = $(".add_field_button"); //Add button ID
+//        var x          = <?php //if(isset($data['echantillons'])){echo 10 - (count($data['echantillons'])-1);} else { echo 2; }?>//;
+	    var x = <?php if(isset($data['echantillons']) && !empty($data['echantillons'])){ echo count($data['echantillons']) + 1;} else { echo 2;} ?>;
 
         $(add_button).click(function(e){
             e.preventDefault();
-	        if(x <= 10) {
-                $(wrapper).append('<div class="input_fields_wrap"> <a href="#" class="remove_field"><button class="add_field_button btn btn-outline-primary">-</button></a> <select name="pdt1" style="width: 100%" class="custom-select"> <option value="" disabled selected hidden>Produit…</option> </select> <input type="number" class="form-control" name="qte' + x + '" placeholder="Qte"></div>');
-                document.getElementById("echantillonNbr").value = x;
+            if(x <= 10) {
+                $(wrapper).append('<div class="input_fields_wrap">' +
+                        '<a href="#" class="remove_field">'+
+                            '<button class="add_field_button btn btn-outline-primary">-</button>'+
+                        '</a>'+
+                        '<select name="pdt'+ x +'" style="width: 100%" class="custom-select">'+
+                            '<option value="" disabled selected hidden>Produit…'+ x +'</option>'+
+                        '<?php foreach ($produits as $produit){ ?>'+
+	                        '<option value="<?php echo $produit->getMedDepotLegal() ?>"><?php echo $produit->getLibelle() ?></option>'+
+                        '<?php } ?>'+
+                        '</select>'+
+                        '<input type="number" class="form-control" name="qte' + x + '" placeholder="Qte" value='+ x +'>'+
+                    '</div>');
                 x++;
             }
         });
-
         $(wrapper).on("click",".remove_field", function(e){
             e.preventDefault(); $(this).parent('div').remove();
             x--;
-            document.getElementById("echantillonNbr").value = x;
         })
     });
 </script>

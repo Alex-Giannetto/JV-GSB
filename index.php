@@ -8,8 +8,6 @@ session_start();
 
 require "View/IncludePart/head.inc.php";
 
-require_once "Script/function.lib.php";
-
 $uc = (isset($_GET['uc'])) ? $_GET['uc'] : "acceuil";
 
 switch ($uc){
