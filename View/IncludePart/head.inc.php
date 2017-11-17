@@ -44,7 +44,7 @@
 			<form class="form-inline my-2 my-lg-0">
 				<?php if(!isset($_SESSION['user']))
 				{ ?>
-					<a class="" href="index.php?uc=administrer&action=connexion"><input type="button" class="btn" value="Connexion"></a>
+					<a class="" href="index.php?uc=Administration&action=Connexion"><input type="button" class="btn" value="Connexion"></a>
 				<?php } else{ ?>
 					<a class="" href="index.php?uc=administrer&action=deconnexion"><input type="button" class="btn" value="Déconnexion"></a>
 				<?php } ?>

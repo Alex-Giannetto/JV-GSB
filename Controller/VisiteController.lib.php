@@ -16,7 +16,7 @@ switch ($action){
 		$medecins = MedecinManager::getLstMedecin();
 		$produits = ProduitManager::getLstProduit();
 		$title = "Ajouter une visite";
-
+		$modification = true;
 		// En cas de récupération de formulaire
 		if(isset($_POST['ajouter'])){
 			if(isset($_POST['num']) && !empty($_POST['num'])
@@ -69,7 +69,7 @@ switch ($action){
 				"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : null,
 				"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : null,
 				"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
-				"echantillons" => $echantillons
+				"echantillons" => $echantillons,
 			);
 		}
 
@@ -78,6 +78,7 @@ switch ($action){
 		break;
 	
 	default:
+		$title = "Rapport de visite";
 		// Affichage de la liste des visite (pour possibilité de supprimer, ajouter, modifier, visualiser visite)
 		break;
 }

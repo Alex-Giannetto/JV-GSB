@@ -14,6 +14,11 @@ switch ($uc){
 	case "visite":
 		require_once "Controller/VisiteController.lib.php";
 		break;
+
+	case 'Administration':
+		require_once "Controller/AdministrationController.lib.php";
+		break;
+
 	default:
 		// inclure acceuil
 		break;

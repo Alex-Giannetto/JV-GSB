@@ -9,6 +9,6 @@
 class RapportVisiteManager
 {
 	public static function addRapport(RapportVisite $rapport){
-
+		$query = MonPdo::getInstance()->prepare('INSERT INTO rapport_visite()');
 	}
 }
