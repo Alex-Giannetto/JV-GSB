@@ -115,9 +115,9 @@ input[type="checkbox"]:checked {
 }
 
 input[type="text"]:disabled{
-    background-color: white !important;
-    color: #AEB3B8 !important;
-}
+     background-color: white !important;
+     color: #AEB3B8 !important;
+ }
 
 .firstContainer{
     padding-top : 30vh;

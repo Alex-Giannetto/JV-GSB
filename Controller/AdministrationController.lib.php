@@ -13,7 +13,6 @@ $action = (isset($_REQUEST['action']))? $_REQUEST['action'] : "";
 switch ($action){
 	case "Connexion":
 		$title = "Connexion";
-
 		// En cas de récupération du formulaire
 		if(isset($_POST['mail']) && isset($_POST['password'])){
 			$result = UtilisateurManager::connexion($_POST['mail'], sha1($_POST['password']));
@@ -29,8 +28,15 @@ switch ($action){
 		require "View/Connexion/Connexion.inc.php";
 		break;
 
+	case "Deconnexion":
+		$title = "";
+		session_destroy();
+		echo '<meta http-equiv="refresh" content="0; URL=index.php">';
+		break;
+
 	default:
-		// Affichage de la liste des visite (pour possibilité de supprimer, ajouter, modifier, visualiser visite)
+		$title = "";
+		echo '<meta http-equiv="refresh" content="0; URL=index.php">';
 		break;
 }
 fonctions::entete($title);
