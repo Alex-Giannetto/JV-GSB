@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class=" col-lg-3"></div>
 		<div class=" col-lg-6 bloc">
-			<form method='post' action="index.php?uc=visite&action=<?php echo $_GET['action']; ?>">
+			<form method='post' action="index.php?uc=Administration&action=<?php echo $_GET['action']; ?>">
 				<div class="form-group">
 					<input type="mail" class="form-control" name="mail" placeholder="Adresse mail…" required>
 				</div>
@@ -16,6 +16,8 @@
 		</div>
 	</div>
 </div>
+
+<?php if (isset($message)){fonctions::message($message);} ?>
 
 
 

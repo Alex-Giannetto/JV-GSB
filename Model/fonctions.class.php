@@ -32,4 +32,15 @@ class fonctions
 		);
 	}
 
+
+
+	public static function message($message){
+?>
+		<div class="container ">
+			<div class="alert alert-<?php if($message[0] == 0){ echo 'danger'; } else { echo 'success';} ?> text-center float-bottom">
+				<?= $message[1] ?>
+			</div>
+		</div>
+<?php
+	}
 }

@@ -114,6 +114,11 @@ input[type="checkbox"]:checked {
 	border 	   : 4px solid #e1e1e1;
 }
 
+input[type="text"]:disabled{
+    background-color: white !important;
+    color: #AEB3B8 !important;
+}
+
 .firstContainer{
     padding-top : 30vh;
     min-height  :20vh;
