@@ -30,9 +30,9 @@ if(isset($_SESSION['user'])) {
 }
 
 
-
-var_dump(EquipeManager::getEquipe(2));
-
+echo "<pre style='background-color: #b8b8b8; border: solid 2px grey;'>";
+var_dump("rien");
+echo "</pre>";
 
 
 require  "View/IncludePart/footer.inc.php";

@@ -76,7 +76,7 @@ class Equipe
 	 */
 	public function getLstUtilisateur()
 	{
-		return $this->lstUtilisateur;
+		return $this->lstUtilisateurs;
 	}
 
 	/**
@@ -87,7 +87,7 @@ class Equipe
 		$this->lstUtilisateur = $lstUtilisateur;
 	}
 
-	public function ajouterUtilisateur(Utilisateur $utilisateur){
+	public function ajouterUtilisateur($utilisateur){
 		$this->lstUtilisateurs[] = $utilisateur;
 	}
 }
