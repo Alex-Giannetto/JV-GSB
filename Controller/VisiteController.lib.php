@@ -109,9 +109,17 @@ switch ($action){
 				$message = [0, "Veuillez remplir tout les champs"];
 			}
 			RapportVisiteManager::updRapport($_POST['num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
+			RapportVisiteManager::updRapport($_POST['rapNum']);
 		}
         require "View/Visite/FormulaireVisite.inc.php";
         break;
+
+    case"suppression":
+        RapportVisiteManager :: delRapport($_GET['id']);
+        require "View/Visite/FormulaireVisite.inc.php";
+
+        break;
+
 	
 	default:
 		$title = "Rapport de visite";

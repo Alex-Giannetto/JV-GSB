@@ -33,7 +33,7 @@ class RapportVisiteManager
         'medDepotLegal2' => $medDepLeg2
     ));
 
-    public static function delRapport($id)){
+    public static function delRapport($id){
         $query = MonPdo::getInstance()->prepare('DELETE FROM rapport_visite WHERE rapNum = :rapNum
         ');
         $query->execute(array('rapNum' => $id))
