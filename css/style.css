@@ -114,9 +114,10 @@ input[type="checkbox"]:checked {
 	border 	   : 4px solid #e1e1e1;
 }
 
-input[type="text"]:disabled{
-     background-color: white !important;
-     color: #AEB3B8 !important;
+input[type="text"]:disabled, fieldset:disabled input[type="text"]{
+    background-color: white !important;
+    color: #AEB3B8 !important;
+    cursor: not-allowed;
  }
 
 .firstContainer{
