@@ -8,7 +8,7 @@
  */
 class RapportVisite
 {
-	protected $rapNum, $visiteurMatricule, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2;
+	protected $rapNum, $visiteurMatricule, $rempCode, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2;
 	protected $echantillon = [];
 
 	/**
@@ -135,6 +135,22 @@ class RapportVisite
 	public function setRapMotif($rapMotif)
 	{
 		$this->rapMotif = $rapMotif;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getRempCode()
+	{
+		return $this->rempCode;
+	}
+
+	/**
+	 * @param mixed $rempCode
+	 */
+	public function setRempCode($rempCode)
+	{
+		$this->rempCode = $rempCode;
 	}
 
 	/**
