@@ -48,7 +48,7 @@ class RapportVisiteManager
         $query->execute(array('rapNum' => $id))
         $query = MonPdo::getInstance()->prepare('DELETE FROM rapport_visite WHERE rapNum = :rapNum
         ');
-        $query->execute(array('rapNum' => $id))
+        $query->execute(array('rapNum' => $id));
 
     }
 }
