@@ -84,7 +84,30 @@ switch ($action){
 		$modification = true;
 
 		if(isset($_POST['modifier'])){
-			RapportVisiteManager::updRapport($_POST['Num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
+			if(isset($_POST['num']) && !empty($_POST['num'])
+			   	&& isset($_POST['medecin']) && !empty($_POST['medecin'])
+			   	&& isset($_POST['remplacant']) && !empty($_POST['remplacant'])
+			   	&& isset($_POST['date']) && !empty($_POST['date'])
+			   	&& isset($_POST['bilan']) && !empty($_POST['bilan'])
+			   	&& isset($_POST['motif']) && !empty($_POST['motif'])
+			   	&& isset($_POST['firstProduit']) && !empty($_POST['firstProduit'])
+			   	&& isset($_POST['secondProduit']) && !empty($_POST['secondProduit'])
+			   	&& isset($_POST['doc']) && !empty($_POST['doc'])){
+
+				if($_POST['remplacant'] != $_POST['medecin']){
+					if($_POST['motif'] != "AUT" || ($_POST['motif'] == "AUT" && !empty($_POST['autre']))){
+						$message = [1, "Modification effectuée"];
+						var_dump($message);
+					} else {
+						$message = [0, "Veuillez remplir tout les champs"];
+					}
+				} else {
+					$message = [0, "Le médecin ne peux être le même que le remplaçant"];
+				}
+			} else {
+				$message = [0, "Veuillez remplir tout les champs"];
+			}
+			RapportVisiteManager::updRapport($_POST['num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
 		}
         require "View/Visite/FormulaireVisite.inc.php";
         break;
