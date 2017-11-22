@@ -83,6 +83,7 @@ switch ($action){
 		$title = "Modifier une visite";
 		$modification = true;
 
+		//vérification des champs
 		if(isset($_POST['modifier'])){
 			if(isset($_POST['num']) && !empty($_POST['num'])
 			   	&& isset($_POST['medecin']) && !empty($_POST['medecin'])
