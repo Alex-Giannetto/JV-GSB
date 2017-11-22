@@ -76,6 +76,19 @@ switch ($action){
 		//inclusion de la page d'affichage
 		require "View/Visite/FormulaireVisite.inc.php";
 		break;
+
+	case "modifier":
+		//variables
+		$medecins = MedecinManager::getLstMedecin();
+		$produits = ProduitManager::getLstProduit();
+		$title = "Modifier une visite";
+		$modification = true;
+
+		if(isset($_POST['modifier'])){
+			RapportVisiteManager::updRapport($_POST['rapNum']);
+		}
+        require "View/Visite/FormulaireVisite.inc.php";
+        break;
 	
 	default:
 		$title = "Rapport de visite";
