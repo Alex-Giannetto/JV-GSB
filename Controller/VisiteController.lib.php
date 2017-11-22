@@ -15,7 +15,7 @@ switch ($action){
 		$medecins = MedecinManager::getLstMedecin();
 		$produits = ProduitManager::getLstProduit();
 		$title = "Ajouter une visite";
-		$modification = false;
+		$modification = true;
 		// En cas de récupération de formulaire
 		if(isset($_POST['ajouter'])){
 			if(isset($_POST['num']) && !empty($_POST['num'])
@@ -71,7 +71,6 @@ switch ($action){
 			}
 
 		}
-
 		//inclusion de la page d'affichage
 		require "View/Visite/FormulaireVisite.inc.php";
 		break;
@@ -117,19 +116,14 @@ switch ($action){
 		$title = "Rapport de visite";
 		if($_SESSION['user']->getRole() == 2){
 			$equipe = EquipeManager::getEquipe($_SESSION['user']->getNum());
-			echo "dnjksq";
 
-			$rapports = [];
+			$rapports = array();
 
-			foreach ($equipe->getLstUtilisateur() as $utilisateur){
 
-			}
 
 		} else {
 			$rapports = RapportVisiteManager::getLstRapport();
 		}
-
-
 
 		// Affichage de la liste des visite (pour possibilité de supprimer, ajouter, modifier, visualiser visite)
 		require "View/Visite/ViewVisite.inc.php";
@@ -137,3 +131,9 @@ switch ($action){
 }
 
 fonctions::entete($title);
+
+?>
+
+<pre style='background-color: #b8b8b8; border: solid 2px grey;'>
+<?php var_dump(EquipeManager::getLstRapportEquipe($equipe)); ?>
+</pre>

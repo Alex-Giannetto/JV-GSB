@@ -44,4 +44,15 @@ class EquipeManager
 		}
 		return $equipe;
 	}
+
+	public static function getLstRapportEquipe(Equipe $equipe){
+		$user = "";
+		foreach ($equipe->getLstUtilisateur()[0] as $visiteur){
+			$user += ", ".$visiteur->getNum();
+		}
+
+		return $user;
+//		$query = MonPdo::getInstance()->prepare('SELECT rapport_visite.* FROM rapport_visite, utilisateur where rapport_visite.visiteurMatricule = utilisateur.num AND utilisateur.num in (:user)');
+	}
+
 }

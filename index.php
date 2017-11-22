@@ -30,9 +30,6 @@ if(isset($_SESSION['user'])) {
 }
 
 
-echo "<pre style='background-color: #b8b8b8; border: solid 2px grey;'>";
-var_dump("rien");
-echo "</pre>";
 
 
 require  "View/IncludePart/footer.inc.php";
