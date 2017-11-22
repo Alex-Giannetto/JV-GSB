@@ -21,14 +21,14 @@
 					<th>Date</th>
 				</thead>
 				<tbody>
-					<?php foreach ($rapports as $rapport ) { ?>
-						<tr>
-							<td><?php echo $rapport->getRapNum(); ?></td>
-							<td><?php echo $rapport->getVisiteurMatricule(); ?></td>
-							<td><?php echo $rapport->getPraCode(); ?></td>
-							<td><?php echo $rapport->getRapDate(); ?></td>
-						</tr>
-					<?php } ?>
+<!--					--><?php //foreach ($rapports as $rapport ) { ?>
+<!--						<tr>-->
+<!--							<td>--><?php //echo $rapport->getRapNum(); ?><!--</td>-->
+<!--							<td>--><?php //echo $rapport->getVisiteurMatricule(); ?><!--</td>-->
+<!--							<td>--><?php //echo $rapport->getPraCode(); ?><!--</td>-->
+<!--							<td>--><?php //echo $rapport->getRapDate(); ?><!--</td>-->
+<!--						</tr>-->
+<!--					--><?php //} ?>
 				</tbody>
 			</table>
 		</div>
