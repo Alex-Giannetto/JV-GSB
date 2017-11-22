@@ -8,7 +8,7 @@
  */
 class Utilisateur
 {
-	protected $num, $prenom, $mail, $password;
+	protected $num, $nom, $prenom, $mail, $password, $role;
 
 	/**
 	 * Utilisateur constructor.
@@ -17,12 +17,15 @@ class Utilisateur
 	 * @param $mail
 	 * @param $password
 	 */
-	public function Utilisateur($num, $prenom, $mail, $password)
+	public function Utilisateur($num, $nom, $prenom, $mail, $password, $role)
 	{
 		$this->setNum($num);
+		$this->setNom($nom);
 		$this->setPrenom($prenom);
 		$this->setMail($mail);
 		$this->setPassword($password);
+		$this->setRole($role);
+
 	}
 
 	/**
@@ -32,6 +35,37 @@ class Utilisateur
 	{
 	}
 
+	/**
+	 * @return mixed
+	 */
+	public function getNom()
+	{
+		return $this->nom;
+	}
+
+	/**
+	 * @param mixed $nom
+	 */
+	public function setNom($nom)
+	{
+		$this->nom = $nom;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getRole()
+	{
+		return $this->role;
+	}
+
+	/**
+	 * @param mixed $role
+	 */
+	public function setRole($role)
+	{
+		$this->role = $role;
+	}
 
 	/**
 	 * @return mixed
