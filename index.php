@@ -6,7 +6,7 @@ spl_autoload_register('chargerClasse');
 
 session_start();
 
-require "View/IncludePart/head.inc.php";
+//require "View/IncludePart/head.inc.php";
 
 $uc = (isset($_GET['uc'])) ? $_GET['uc'] : "acceuil";
 

@@ -115,7 +115,6 @@ switch ($action){
 
     case"suppression":
         RapportVisiteManager :: delRapport($_GET['id']);
-        require "View/Visite/FormulaireVisite.inc.php";
 
         break;
 

@@ -17,16 +17,16 @@ class Utilisateur
 	 * @param $mail
 	 * @param $password
 	 */
-	public function Utilisateur($num, $nom, $prenom, $mail, $password, $role)
-	{
-		$this->setNum($num);
-		$this->setNom($nom);
-		$this->setPrenom($prenom);
-		$this->setMail($mail);
-		$this->setPassword($password);
-		$this->setRole($role);
-
-	}
+//	public function Utilisateur($num, $nom, $prenom, $mail, $password, $role)
+//	{
+//		$this->setNum($num);
+//		$this->setNom($nom);
+//		$this->setPrenom($prenom);
+//		$this->setMail($mail);
+//		$this->setPassword($password);
+//		$this->setRole($role);
+//
+//	}
 
 	/**
 	 * Utilisateur constructor.

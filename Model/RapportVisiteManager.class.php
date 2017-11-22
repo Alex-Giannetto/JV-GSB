@@ -43,6 +43,9 @@ class RapportVisiteManager
     ));
 
     public static function delRapport($id){
+        $query = MonPdo::getInstance()->prepare('DELETE FROM echantillons WHERE rapNum = :rapNum
+        ');
+        $query->execute(array('rapNum' => $id))
         $query = MonPdo::getInstance()->prepare('DELETE FROM rapport_visite WHERE rapNum = :rapNum
         ');
         $query->execute(array('rapNum' => $id))
