@@ -91,7 +91,19 @@ switch ($action){
 	
 	default:
 		$title = "Rapport de visite";
-		$rapports = RapportVisiteManager::getLstRapport();
+		if($_SESSION['user']->getRole() == 2){
+			$equipe = EquipeManager::getEquipe($_SESSION['user']->getNum());
+			echo "dnjksq";
+
+			$rapports = [];
+
+			foreach ($equipe->getLstUtilisateur() as $utilisateur){
+
+			}
+
+		} else {
+			$rapports = RapportVisiteManager::getLstRapport();
+		}
 
 
 
