@@ -84,7 +84,7 @@ switch ($action){
 		$modification = true;
 
 		if(isset($_POST['modifier'])){
-			RapportVisiteManager::updRapport($_POST['rapNum']);
+			RapportVisiteManager::updRapport($_POST['Num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
 		}
         require "View/Visite/FormulaireVisite.inc.php";
         break;
