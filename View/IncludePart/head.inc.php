@@ -29,7 +29,7 @@
 		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="index.php?uc=visite">Visite</a>
+					<a class="nav-link" href="index.php?uc=visite">Rapport de visite</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link disabled" href="#">Médicament</a>
@@ -42,11 +42,10 @@
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-				<?php if(!isset($_SESSION['user']))
-				{ ?>
-					<a class="" href="index.php?uc=administrer&action=connexion"><input type="button" class="btn" value="Connexion"></a>
+				<?php if(!isset($_SESSION['user'])) { ?>
+					<a class="" href="index.php?uc=Administration&action=Connexion"><input type="button" class="btn" value="Connexion"></a>
 				<?php } else{ ?>
-					<a class="" href="index.php?uc=administrer&action=deconnexion"><input type="button" class="btn" value="Déconnexion"></a>
+					<a class="" href="index.php?uc=Administration&action=Deconnexion"><input type="button" class="btn" value="Déconnexion"></a>
 				<?php } ?>
 			</form>
 		</div>
