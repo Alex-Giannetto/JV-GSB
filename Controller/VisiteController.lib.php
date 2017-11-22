@@ -9,14 +9,13 @@
  */
 
 $action = (isset($_REQUEST['action']))? $_REQUEST['action'] : "";
-
 switch ($action){
 	case "ajouter":
 		//variable
 		$medecins = MedecinManager::getLstMedecin();
 		$produits = ProduitManager::getLstProduit();
 		$title = "Ajouter une visite";
-		$modification = true;
+		$modification = false;
 		// En cas de récupération de formulaire
 		if(isset($_POST['ajouter'])){
 			if(isset($_POST['num']) && !empty($_POST['num'])
@@ -32,6 +31,7 @@ switch ($action){
 				if($_POST['remplacant'] != $_POST['medecin']){
 					if($_POST['motif'] != "AUT" || ($_POST['motif'] == "AUT" && !empty($_POST['autre']))){
 						$message = [1, "Réussi !"];
+						var_dump($message);
 					} else {
 						$message = [0, "Veuillez remplir tout les champs"];
 					}
@@ -53,24 +53,23 @@ switch ($action){
 						"medDepotLegal" => $_POST[$indexPdt],
 						"quantite" => $_POST[$indexQte]
 					);
-					echo ' ajout';
 				}
+
+				$data = array(
+					"num" => (!empty($_POST['num'])) ? $_POST['num'] : null,
+					"date" => (!empty($_POST['date'])) ? $_POST['date'] : null,
+					"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : null,
+					"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : null,
+					"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : null,
+					"autre" => (!empty($_POST['autre'])) ? $_POST['autre'] : null,
+					"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : null,
+					"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : null,
+					"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : null,
+					"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
+					"echantillons" => $echantillons,
+				);
 			}
 
-
-			$data = array(
-				"num" => (!empty($_POST['num'])) ? $_POST['num'] : null,
-				"date" => (!empty($_POST['date'])) ? $_POST['date'] : null,
-				"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : null,
-				"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : null,
-				"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : null,
-				"autre" => (!empty($_POST['autre'])) ? $_POST['autre'] : null,
-				"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : null,
-				"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : null,
-				"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : null,
-				"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
-				"echantillons" => $echantillons,
-			);
 		}
 
 		//inclusion de la page d'affichage
@@ -79,7 +78,12 @@ switch ($action){
 	
 	default:
 		$title = "Rapport de visite";
+		$rapports = RapportVisiteManager::getLstRapport();
+
+
+
 		// Affichage de la liste des visite (pour possibilité de supprimer, ajouter, modifier, visualiser visite)
+		require "View/Visite/ViewVisite.inc.php";
 		break;
 }
 

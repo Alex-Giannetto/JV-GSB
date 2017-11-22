@@ -7,7 +7,7 @@
 				<fieldset <?php if(!$modification){ echo "disabled"; }?>>
 					<div class="row">
 						<div class="col-md-6 margin-bottom-2">
-							<input class="form-control" type="text" name="num" <?php if(isset($data['num'])){ echo 'value="'.$data['num'].'"'; } ?> cla placeholder="Numéro…" />
+							<input class="form-control" type="text" name="num" <?php if(isset($data['num'])){ echo 'value="'.$data['num'].'"'; } ?> disabled placeholder="Numéro…" />
 						</div>
 						<div class="col-md-6 margin-bottom-2">
 							<input class="form-control" type="date" name="date" <?php if(isset($data['date'])){ echo 'value="'.$data['date'].'"'; } ?> required placeholder="Date…" />
@@ -150,17 +150,6 @@
 
 <script>
 
-
-    $(window).scroll(function() {
-
-        var scroll = $(window).scrollTop();
-
-        if (scroll >= 150) {
-            $(".navbar").addClass("shadow");
-        } else {
-            $(".navbar").removeClass("shadow");
-        }
-    });
 
     $('#motif').change(function(e){
         e.preventDefault();
