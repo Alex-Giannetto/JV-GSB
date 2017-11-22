@@ -17,7 +17,6 @@ class RapportVisiteManager
 
 	// Retourne la liste de tout les rapport de visite
 	public static function getLstRapport(){
-
 		$query = MonPdo::getInstance()->query('SELECT * FROM rapport_visite');
 		return $query->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'RapportVisite');
 	}
