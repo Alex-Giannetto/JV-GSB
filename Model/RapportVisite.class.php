@@ -15,6 +15,7 @@ class RapportVisite
 	 * RapportVisite constructor.
 	 * @param $rapNum
 	 * @param $visiteurMatricule
+	 * @param $rempCode
 	 * @param $praCode
 	 * @param $rapDate
 	 * @param $rapBilan
@@ -22,10 +23,11 @@ class RapportVisite
 	 * @param $medDepotLegal1
 	 * @param $medDepotLegal2
 	 */
-	public function RapportVisite($rapNum, $visiteurMatricule, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2)
+	public function RapportVisite($rapNum, $visiteurMatricule, $rempCode, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2)
 	{
 		$this->setRapNum($rapNum);
 		$this->setVisiteurMatricule($visiteurMatricule);
+		$this->setRempCode($rempCode);
 		$this->setPraCode($praCode);
 		$this->setRapDate($rapDate);
 		$this->setRapBilan($rapBilan);
