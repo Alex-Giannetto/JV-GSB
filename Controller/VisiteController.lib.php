@@ -10,6 +10,36 @@
 
 $action = (isset($_REQUEST['action']))? $_REQUEST['action'] : "";
 switch ($action){
+	case "view":
+		$title = "Ajouter une visite";
+		$modification = false;
+
+		$medecins = array();
+		$produits = array();
+
+		$rapports = RapportVisiteManager::getRapportById($_GET['id']);
+
+		$data = array(
+			"num" => $rapports->getRapNum(),
+			"date" => $rapports->getRapDate(),
+			"medecin" => $rapports->getPraCode(),
+			"motif" => $rapports->getRapMotif(),
+			"remplacant" => $rapports->getRempCode(),
+			"autre" => $rapports->getRapMotif(),
+			"bilan" => $rapports->getRapBilan(),
+			"firstProduit" => $rapports->getMedDepotLegal1(),
+			"secondProduit" => $rapports->getMedDepotLegal2(),
+			"doc" => $rapports->get,
+			"echantillons" => array(),
+		);
+
+
+
+		//inclusion de la page d'affichage
+		require "View/Visite/FormulaireVisite.inc.php";
+
+		break;
+
 	case "ajouter":
 		//variable
 		$medecins = MedecinManager::getLstMedecin();

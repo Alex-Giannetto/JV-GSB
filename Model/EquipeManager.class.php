@@ -47,8 +47,8 @@ class EquipeManager
 
 	public static function getLstRapportEquipe(Equipe $equipe){
 
-		$query = MonPdo::getInstance()->prepare("SELECT rapport_visite.* FROM rapport_visite, utilisateur WHERE rapport_visite.visiteurMatricule = utilisateur.num AND utilisateur.num IN ( SELECT numUtilisateur FROM appartientequipe WHERE numEquipe = :numEquipe  )");
-		$query->execute(array('numEquipe' => $equipe->getId()));
+		$query = MonPdo::getInstance()->prepare("SELECT rapport_visite.* FROM rapport_visite, utilisateur WHERE rapport_visite.visiteurMatricule = utilisateur.num AND ( utilisateur.num IN ( SELECT numUtilisateur FROM appartientequipe WHERE numEquipe = :numEquipe) OR visiteurMatricule = :visiteurMatricule)");
+		$query->execute(array('numEquipe' => $equipe->getId(), 'visiteurMatricule' => $equipe->getDelegue()->getNum()));
 
 //		$query->execute();
 		return $query->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'RapportVisite');
