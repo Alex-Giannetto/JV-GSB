@@ -34,5 +34,10 @@ class UtilisateurManager
 		}
 	}
 
+	public static function getLstRapportByUtilisateurId(Utilisateur $utilisateur){
+		$query = MonPdo::getInstance()->prepare('SELECT * FROM rapport_visite WHERE visiteurMatricule = :numVisiteur');
+		$query->execute(array('numVisiteur' => $utilisateur->getNum()));
+		return $query->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'RapportVisite');
+	}
 
 }

@@ -121,19 +121,18 @@ switch ($action){
 	
 	default:
 		$title = "Rapport de visite";
-		if($_SESSION['user']->getRole() == 2){
-			$equipe = EquipeManager::getEquipe($_SESSION['user']->getNum());
-
-			$rapports = array();
-
-
-
-		} else {
+		if($_SESSION['user']->getRole() == 0){
 			$rapports = RapportVisiteManager::getLstRapport();
+
+		} else if ($_SESSION['user']->getRole() == 1) {
+			$equipe = EquipeManager::getEquipe($_SESSION['user']->getNum());
+			$rapports = EquipeManager::getLstRapportEquipe($equipe);
+		} else {
+			$rapports = UtilisateurManager::getLstRapportByUtilisateurId($_SESSION['user']);
 		}
 
 		// Affichage de la liste des visite (pour possibilité de supprimer, ajouter, modifier, visualiser visite)
-		require "View/Visite/ViewVisite.inc.php";
+		require "View/Visite/visite.inc.php";
 		break;
 }
 
@@ -141,6 +140,6 @@ fonctions::entete($title);
 
 ?>
 
-<pre style='background-color: #b8b8b8; border: solid 2px grey;'>
-<?php var_dump(EquipeManager::getLstRapportEquipe($equipe)); ?>
-</pre>
+<!--<pre style='background-color: #b8b8b8; color: white; border: solid 2px grey;'>-->
+<?php //var_dump($_SESSION['user']); ?>
+<!--</pre>-->
