@@ -19,11 +19,7 @@ class Medecin
 
 	}
 
-	public function Medecin($code, $nom, $prenom){
-		$this->setPraCode($code);
-		$this->setPraNom($nom);
-		$this->setPraPrenom($prenom);
-	}
+
 
 	/**
 	 * @return mixed

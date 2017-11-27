@@ -15,11 +15,6 @@ class Produit
 	 * @param $medDepotLegal
 	 * @param $libelle
 	 */
-	public function Produit($medDepotLegal, $libelle)
-	{
-		$this->setMedDepotLegal($medDepotLegal);
-		$this->setLibelle($libelle);
-	}
 
 	/**
 	 * Produit constructor.
