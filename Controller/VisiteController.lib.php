@@ -110,6 +110,21 @@ switch ($action){
 			RapportVisiteManager::updRapport($_POST['num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
 			RapportVisiteManager::updRapport($_POST['rapNum']);
 		}
+
+		$data = array(
+					"num" => (!empty($_POST['num'])) ? $_POST['num'] : $num,
+					"date" => (!empty($_POST['date'])) ? $_POST['date'] : $date,
+					"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : $medecin,
+					"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : $motif,
+					"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : $remplacant,
+					"autre" => (!empty($_POST['autre'])) ? $_POST['autre'] : $autre,
+					"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : $bilan,
+					"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : $firstProduit,
+					"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : $secondProduit,
+					"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : $doc,
+					"echantillons" => $echantillons,
+				);
+
         require "View/Visite/FormulaireVisite.inc.php";
         break;
 
