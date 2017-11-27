@@ -8,13 +8,14 @@
  */
 class RapportVisite
 {
-	protected $rapNum, $visiteurMatricule, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2;
+	protected $rapNum, $visiteurMatricule, $rempCode, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2;
 	protected $echantillon = [];
 
 	/**
 	 * RapportVisite constructor.
 	 * @param $rapNum
 	 * @param $visiteurMatricule
+	 * @param $rempCode
 	 * @param $praCode
 	 * @param $rapDate
 	 * @param $rapBilan
@@ -22,10 +23,11 @@ class RapportVisite
 	 * @param $medDepotLegal1
 	 * @param $medDepotLegal2
 	 */
-	public function RapportVisite($rapNum, $visiteurMatricule, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2)
+	public function RapportVisite($rapNum, $visiteurMatricule, $rempCode, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2)
 	{
 		$this->setRapNum($rapNum);
 		$this->setVisiteurMatricule($visiteurMatricule);
+		$this->setRempCode($rempCode);
 		$this->setPraCode($praCode);
 		$this->setRapDate($rapDate);
 		$this->setRapBilan($rapBilan);
@@ -135,6 +137,22 @@ class RapportVisite
 	public function setRapMotif($rapMotif)
 	{
 		$this->rapMotif = $rapMotif;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getRempCode()
+	{
+		return $this->rempCode;
+	}
+
+	/**
+	 * @param mixed $rempCode
+	 */
+	public function setRempCode($rempCode)
+	{
+		$this->rempCode = $rempCode;
 	}
 
 	/**
