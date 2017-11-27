@@ -113,9 +113,10 @@ switch ($action){
         require "View/Visite/FormulaireVisite.inc.php";
         break;
 
-    case"suppression":
+    case"delete":
         RapportVisiteManager :: delRapport($_GET['id']);
-
+    $title='';
+        echo '<meta http-equiv="refresh" content="0; URL=index.php?uc=visite">';
         break;
 
 	
