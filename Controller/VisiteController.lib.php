@@ -139,4 +139,6 @@ switch ($action){
 
 fonctions::entete($title);
 
+
+var_dump($_SESSION['user']);
 ?>
