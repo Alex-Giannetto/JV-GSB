@@ -157,5 +157,5 @@ fonctions::entete($title);
 ?>
 
 <pre style='background-color: #b8b8b8; border: solid 2px grey;'>
-<?php var_dump(EquipeManager::getLstRapportEquipe($equipe)); ?>
+<?php //var_dump(EquipeManager::getLstRapportEquipe($equipe)); ?>
 </pre>
