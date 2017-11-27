@@ -133,20 +133,10 @@ switch ($action){
 		}
 
 		// Affichage de la liste des visite (pour possibilité de supprimer, ajouter, modifier, visualiser visite)
-		require "View/Visite/ViewVisite.inc.php";
+		require "View/Visite/visite.inc.php";
 		break;
 }
 
 fonctions::entete($title);
 
 ?>
-
-<<<<<<< HEAD
-<pre style='background-color: #b8b8b8; border: solid 2px grey;'>
-<?php //var_dump(EquipeManager::getLstRapportEquipe($equipe)); ?>
-</pre>
-=======
-<!--<pre style='background-color: #b8b8b8; border: solid 2px grey;'>-->
-<?php //var_dump(EquipeManager::getLstRapportEquipe($equipe)); ?>
-<!--</pre>-->
->>>>>>> origin/master
