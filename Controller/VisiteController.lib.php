@@ -121,24 +121,21 @@ switch ($action){
 	
 	default:
 		$title = "Rapport de visite";
-		if($_SESSION['user']->getRole() == 2){
-			$equipe = EquipeManager::getEquipe($_SESSION['user']->getNum());
-
+		if($_SESSION['user']->getRole() == 0){
+			$rapports = RapportVisiteManager::getLstRapport();
 			$rapports = array();
 
-
-
+		} else if ($_SESSION['user']->getRole() == 1) {
+//			$equipe = EquipeManager::getEquipe($_SESSION['user']->get
+			$rapports = array();
 		} else {
-			$rapports = RapportVisiteManager::getLstRapport();
+			$rapports = UtilisateurManager::getLstRapportByUtilisateurId($_SESSION['user']);
 		}
-
-		// Affichage de la liste des visite (pour possibilité de supprimer, ajouter, modifier, visualiser visite)
-		require "View/Visite/visite.inc.php";
-		break;
+  		require "View/Visite/visite.inc.php";
+  		break;
 }
 
 fonctions::entete($title);
-
-
-var_dump($_SESSION['user']);
 ?>
+
+
