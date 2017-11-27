@@ -10,36 +10,6 @@
 
 $action = (isset($_REQUEST['action']))? $_REQUEST['action'] : "";
 switch ($action){
-	case "view":
-		$title = "Ajouter une visite";
-		$modification = false;
-
-		$medecins = array();
-		$produits = array();
-
-		$rapports = RapportVisiteManager::getRapportById($_GET['id']);
-
-		$data = array(
-			"num" => $rapports->getRapNum(),
-			"date" => $rapports->getRapDate(),
-			"medecin" => $rapports->getPraCode(),
-			"motif" => $rapports->getRapMotif(),
-			"remplacant" => $rapports->getRempCode(),
-			"autre" => $rapports->getRapMotif(),
-			"bilan" => $rapports->getRapBilan(),
-			"firstProduit" => $rapports->getMedDepotLegal1(),
-			"secondProduit" => $rapports->getMedDepotLegal2(),
-			"doc" => $rapports->get,
-			"echantillons" => array(),
-		);
-
-
-
-		//inclusion de la page d'affichage
-		require "View/Visite/FormulaireVisite.inc.php";
-
-		break;
-
 	case "ajouter":
 		//variable
 		$medecins = MedecinManager::getLstMedecin();
@@ -151,18 +121,19 @@ switch ($action){
 	
 	default:
 		$title = "Rapport de visite";
-		if($_SESSION['user']->getRole() == 0){
-			$rapports = RapportVisiteManager::getLstRapport();
-
-		} else if ($_SESSION['user']->getRole() == 1) {
+		if($_SESSION['user']->getRole() == 2){
 			$equipe = EquipeManager::getEquipe($_SESSION['user']->getNum());
-			$rapports = EquipeManager::getLstRapportEquipe($equipe);
+
+			$rapports = array();
+
+
+
 		} else {
-			$rapports = UtilisateurManager::getLstRapportByUtilisateurId($_SESSION['user']);
+			$rapports = RapportVisiteManager::getLstRapport();
 		}
 
 		// Affichage de la liste des visite (pour possibilité de supprimer, ajouter, modifier, visualiser visite)
-		require "View/Visite/visite.inc.php";
+		require "View/Visite/ViewVisite.inc.php";
 		break;
 }
 
@@ -170,6 +141,6 @@ fonctions::entete($title);
 
 ?>
 
-<!--<pre style='background-color: #b8b8b8; color: white; border: solid 2px grey;'>-->
-<?php //var_dump($_SESSION['user']); ?>
-<!--</pre>-->
+<pre style='background-color: #b8b8b8; border: solid 2px grey;'>
+<?php var_dump(EquipeManager::getLstRapportEquipe($equipe)); ?>
+</pre>

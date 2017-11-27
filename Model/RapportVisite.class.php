@@ -23,18 +23,7 @@ class RapportVisite
 	 * @param $medDepotLegal1
 	 * @param $medDepotLegal2
 	 */
-	public function RapportVisite($rapNum, $visiteurMatricule, $rempCode, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2)
-	{
-		$this->setRapNum($rapNum);
-		$this->setVisiteurMatricule($visiteurMatricule);
-		$this->setRempCode($rempCode);
-		$this->setPraCode($praCode);
-		$this->setRapDate($rapDate);
-		$this->setRapBilan($rapBilan);
-		$this->setRapMotif($rapMotif);
-		$this->setMedDepotLegal1($medDepotLegal1);
-		$this->setMedDepotLegal2($medDepotLegal2);
-	}
+
 
 	/**
 	 * RapportVisite constructor.
