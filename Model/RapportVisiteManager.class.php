@@ -24,6 +24,14 @@ class RapportVisiteManager
  */
 	}
 
+	public static function getRapportById($id){
+		$query = MonPdo::getInstance()->prepare('SELECT * FROM rapport_visite where rapNum = :id');
+		$query->execute(array('id' => $id));
+		$result = $query->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'RapportVisite');
+		return (isset($result[0]))? $result[0] : new RapportVisite();
+	}
+
+
 	// Retourne la liste de tout les rapport de visite
 	public static function getLstRapport(){
 		$query = MonPdo::getInstance()->query('SELECT * FROM rapport_visite');
