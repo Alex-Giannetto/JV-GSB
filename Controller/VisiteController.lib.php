@@ -152,9 +152,3 @@ switch ($action){
 
 fonctions::entete($title);
 ?>
-
-
-<<<<<<< HEAD
-?>
-=======
->>>>>>> origin/master
