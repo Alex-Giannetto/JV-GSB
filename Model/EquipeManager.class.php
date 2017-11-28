@@ -14,13 +14,17 @@ class EquipeManager
 	 * Récupere une équipe avec ses utilisateurs
 	 */
 	public static function getEquipe($numDelegue){
-		$query = MonPdo::getInstance()->prepare('SELECT * FROM equipe WHERE numDelegue = :numDelegue');
-		$query->execute(array('numDelegue' => $numDelegue));
+		$query = MonPdo::getInstance()->prepare('Select * From equipe Where numDelegue = :num');
+		$query->execute(array('num' => $numDelegue));
+
+		$equipe = null;
 
 		while($e = $query->fetch()){
+
+
 			// On va chercher son délégué
 			$getDelegue = MonPdo::getInstance()->prepare('SELECT * FROM utilisateur where num = :num');
-			$getDelegue->execute(array('num' => $e['numDelegue']));
+			$getDelegue->execute(array('num' => $numDelegue));
 			$delegue = $getDelegue->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'Utilisateur');
 
 			// On créer l'équipe qui sera retourné à la fin de la fonction
@@ -40,10 +44,11 @@ class EquipeManager
 				$equipe->ajouterUtilisateur($ut);
 			}
 
-
 		}
+
 		return $equipe;
 	}
+
 
 	public static function getLstRapportEquipe(Equipe $equipe){
 

@@ -25,8 +25,6 @@
 							</select>
 						</div>
 
-
-
 						<div class="col-md-6 margin-bottom-2">
 							<select name="motif" id='motif' class='custom-select w-100' required>
 								<?php if(isset($data['medecin'])){ ?>
@@ -42,7 +40,15 @@
 						<div class="col-md-6 margin-bottom-2">
 							<select name="remplacant"  class='custom-select w-100' required>
 								<?php if(isset($data['medecin'])){ ?>
-									<option SELECTED value="<?php echo $data['remplacant'] ?>"><?php echo MedecinManager::getMedecinById($data['remplacant'])->getPraNom()." - ".MedecinManager::getMedecinById($data['remplacant'])->getPraPrenom(); ?></option>
+									<option SELECTED value="<?php echo $data['remplacant'] ?>">
+										<?php
+										if($data['remplacant'] != -1){
+											echo MedecinManager::getMedecinById($data['remplacant'])->getPraNom()." - ".MedecinManager::getMedecinById($data['remplacant'])->getPraPrenom();
+										} else {
+											echo "Pas de remplacant";
+										}
+										?>
+									</option>
 								<?php } else {?>
 									<option value="" hidden disabled selected >Remplaçant…</option>
 								<?php } ?>
@@ -79,7 +85,15 @@
 						<div class="col-md-6 margin-bottom-2">
 							<select name="secondProduit"  class='custom-select w-100' required>
 								<?php if(isset($data['medecin'])){ ?>
-									<option SELECTED value="<?php echo $data['secondProduit'] ?>"><?php echo ProduitManager::getProduitById($data['secondProduit'])->getLibelle();?></option>
+									<option SELECTED value="<?php echo $data['secondProduit'] ?>">
+										<?php
+										if($data['secondProduit'] != -1) {
+											echo ProduitManager::getProduitById($data['secondProduit'])->getLibelle();
+										} else {
+											echo "Aucun";
+										}
+										?>
+									</option>
 								<?php } else {?>
 									<option value="" disabled selected hidden>Produit n°2…</option>
 								<?php } ?>
@@ -147,6 +161,12 @@
 		</div>
 	</div>
 </div>
+
+
+
+<pre>
+	<?php var_dump($data) ?>
+</pre>
 
 <script>
 
