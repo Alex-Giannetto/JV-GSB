@@ -113,9 +113,9 @@ switch ($action){
         require "View/Visite/FormulaireVisite.inc.php";
         break;
 
-     case"delete":
+	case"delete":
         RapportVisiteManager :: delRapport($_GET['id']);
-    $title='';
+        $title='';
         echo '<meta http-equiv="refresh" content="0; URL=index.php?uc=visite">';
         break;
 
@@ -124,11 +124,10 @@ switch ($action){
 		$title = "Rapport de visite";
 		if($_SESSION['user']->getRole() == 0){
 			$rapports = RapportVisiteManager::getLstRapport();
-			$rapports = array();
 
 		} else if ($_SESSION['user']->getRole() == 1) {
-//			$equipe = EquipeManager::getEquipe($_SESSION['user']->get
-			$rapports = array();
+			$equipe = EquipeManager::getEquipe($_SESSION['user']->getNum());
+			$rapports = EquipeManager::getLstRapportEquipe($equipe);
 		} else {
 			$rapports = UtilisateurManager::getLstRapportByUtilisateurId($_SESSION['user']);
 		}
@@ -138,5 +137,3 @@ switch ($action){
 
 fonctions::entete($title);
 ?>
-
-
