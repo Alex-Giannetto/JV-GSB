@@ -38,7 +38,7 @@ class RapportVisiteManager
 		return $query->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'RapportVisite');
 	}
 
-	public static function updRapport($rapNum, $praCode, $rempCode, $rapDate, $rapBilan, $rapMotif, $medDepLeg1, $medDepLeg2)
+	public static function updRapport($rapNum, $praCode, $rempCode, $rapDate, $rapBilan, $rapMotif, $medDepLeg1, $medDepLeg2, $echantillons)
 	{
 		$query = MonPdo::getInstance()->prepare('UPDATE rapport_visite SET praCode = :praCode, rempCode = :rempCode, rapDate = :rapDate, rapBilan = :rapBilan, rapMotif = :rapMotif, medDepotLegal1 = :medDepLeg1, medDepotLegal2 = :medDepLeg2 WHERE rapNum = ?');
 		$query->execute([
@@ -50,6 +50,10 @@ class RapportVisiteManager
 			'medDepotLegal1' => $medDepLeg1,
 			'medDepotLegal2' => $medDepLeg2
 		]);
+        $req = MonPdo::getInstance()->prepare('UPDATE echantillons SET echantillons = :echantillons WHERE rapNum = ?');
+        $req->execute([
+            'echantillons' => $echantillons
+        ]);
 	}
 
 	public static function delRapport($id){
