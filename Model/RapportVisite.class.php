@@ -181,7 +181,7 @@ class RapportVisite
 	 */
 	public function getEchantillon()
 	{
-		return $this->echantillion;
+		return $this->echantillon;
 	}
 
 	public function ajouterEchantillon($ref, $quantite){

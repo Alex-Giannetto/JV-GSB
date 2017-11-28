@@ -75,12 +75,8 @@ switch ($action){
 		require "View/Visite/FormulaireVisite.inc.php";
 		break;
 
-<<<<<<< HEAD
-
 	case "modify":
-=======
-	case "modifier":
->>>>>>> origin/master
+
 		//variables
 		$medecins = MedecinManager::getLstMedecin();
 		$produits = ProduitManager::getLstProduit();
@@ -88,13 +84,10 @@ switch ($action){
 		$modification = true;
 		$visite = RapportVisiteManager::getRapportById($_GET['id']);
 		//vérification des champs
-<<<<<<< HEAD
-		if(isset($_POST['Modifier'])){
-			if(isset($_GET['num']) && !empty($_GET['num'])
-=======
+
 		if(isset($_POST['modifier'])){
 			if(isset($_POST['num']) && !empty($_POST['num'])
->>>>>>> origin/master
+
 			   	&& isset($_POST['medecin']) && !empty($_POST['medecin'])
 			   	&& isset($_POST['remplacant']) && !empty($_POST['remplacant'])
 			   	&& isset($_POST['date']) && !empty($_POST['date'])
@@ -120,7 +113,7 @@ switch ($action){
 			RapportVisiteManager::updRapport($_POST['num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
 			RapportVisiteManager::updRapport($_POST['rapNum']);
 		}
-<<<<<<< HEAD
+
 
 		$data = array(
 					"num" => (!empty($_POST['num'])) ? $_POST['num'] : $visite->getRapNum(),
@@ -136,8 +129,7 @@ switch ($action){
 					"echantillons" => $visite->getEchantillon()
 				);
 
-=======
->>>>>>> origin/master
+
         require "View/Visite/FormulaireVisite.inc.php";
         break;
 
