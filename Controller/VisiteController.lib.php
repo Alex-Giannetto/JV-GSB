@@ -119,7 +119,36 @@ switch ($action){
         echo '<meta http-equiv="refresh" content="0; URL=index.php?uc=visite">';
         break;
 
-	
+
+
+	case "view":
+		if(isset($_GET['id'])){
+
+			$medecins = array();
+			$produits = array();
+			$title = "💩💩💩💩💩💩💩";
+			$modification = false;
+
+			$rapport = RapportVisiteManager::getRapportById($_GET['id']);
+
+
+			$data = array(
+				"num" => $rapport->getRapNum(),
+				"date" => $rapport->getRapDate(),
+				"medecin" => $rapport->getPraCode(),
+				"motif" => $rapport->getRapMotif(),
+				"remplacant" => $rapport->getRempCode(),
+				"bilan" => $rapport->getRapBilan(),
+				"firstProduit" => $rapport->getMedDepotLegal1(),
+				"secondProduit" => $rapport->getMedDepotLegal2(),
+				"echantillons" => array(),
+			);
+
+			//inclusion de la page d'affichage
+			require "View/Visite/FormulaireVisite.inc.php";
+		}
+		break;
+
 	default:
 		$title = "Rapport de visite";
 		if($_SESSION['user']->getRole() == 0){
