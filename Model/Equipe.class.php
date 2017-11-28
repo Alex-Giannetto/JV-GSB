@@ -12,10 +12,15 @@ class Equipe
 
 	/**
 	 * Equipe constructor.
+	 * @param $id
+	 * @param $nom
+	 * @param $delegue
 	 */
-	public function __construct()
+	public function __construct($id, $nom, $delegue)
 	{
-
+		$this->id = $id;
+		$this->nom = $nom;
+		$this->delegue = $delegue;
 	}
 
 	/**

@@ -12,24 +12,6 @@ class Utilisateur
 
 	/**
 	 * Utilisateur constructor.
-	 * @param $num
-	 * @param $prenom
-	 * @param $mail
-	 * @param $password
-	 */
-//	public function Utilisateur($num, $nom, $prenom, $mail, $password, $role)
-//	{
-//		$this->setNum($num);
-//		$this->setNom($nom);
-//		$this->setPrenom($prenom);
-//		$this->setMail($mail);
-//		$this->setPassword($password);
-//		$this->setRole($role);
-//
-//	}
-
-	/**
-	 * Utilisateur constructor.
 	 */
 	public function __construct()
 	{
@@ -72,7 +54,7 @@ class Utilisateur
 	 */
 	public function getNum()
 	{
-		return $this->num;
+		return (int)$this->num;
 	}
 
 	/**

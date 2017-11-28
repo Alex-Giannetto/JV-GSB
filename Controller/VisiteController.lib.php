@@ -75,8 +75,12 @@ switch ($action){
 		require "View/Visite/FormulaireVisite.inc.php";
 		break;
 
+<<<<<<< HEAD
 
 	case "modify":
+=======
+	case "modifier":
+>>>>>>> origin/master
 		//variables
 		$medecins = MedecinManager::getLstMedecin();
 		$produits = ProduitManager::getLstProduit();
@@ -84,8 +88,13 @@ switch ($action){
 		$modification = true;
 		$visite = RapportVisiteManager::getRapportById($_GET['id']);
 		//vérification des champs
+<<<<<<< HEAD
 		if(isset($_POST['Modifier'])){
 			if(isset($_GET['num']) && !empty($_GET['num'])
+=======
+		if(isset($_POST['modifier'])){
+			if(isset($_POST['num']) && !empty($_POST['num'])
+>>>>>>> origin/master
 			   	&& isset($_POST['medecin']) && !empty($_POST['medecin'])
 			   	&& isset($_POST['remplacant']) && !empty($_POST['remplacant'])
 			   	&& isset($_POST['date']) && !empty($_POST['date'])
@@ -111,6 +120,7 @@ switch ($action){
 			RapportVisiteManager::updRapport($_POST['num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
 			RapportVisiteManager::updRapport($_POST['rapNum']);
 		}
+<<<<<<< HEAD
 
 		$data = array(
 					"num" => (!empty($_POST['num'])) ? $_POST['num'] : $visite->getRapNum(),
@@ -126,25 +136,55 @@ switch ($action){
 					"echantillons" => $visite->getEchantillon()
 				);
 
+=======
+>>>>>>> origin/master
         require "View/Visite/FormulaireVisite.inc.php";
         break;
 
-    case"delete":
+	case"delete":
         RapportVisiteManager :: delRapport($_GET['id']);
-    $title='';
+        $title='';
         echo '<meta http-equiv="refresh" content="0; URL=index.php?uc=visite">';
         break;
 
-	
+
+
+	case "view":
+		if(isset($_GET['id'])){
+
+			$medecins = array();
+			$produits = array();
+			$title = "💩💩💩💩💩💩💩";
+			$modification = false;
+
+			$rapport = RapportVisiteManager::getRapportById($_GET['id']);
+
+
+			$data = array(
+				"num" => $rapport->getRapNum(),
+				"date" => $rapport->getRapDate(),
+				"medecin" => $rapport->getPraCode(),
+				"motif" => $rapport->getRapMotif(),
+				"remplacant" => $rapport->getRempCode(),
+				"bilan" => $rapport->getRapBilan(),
+				"firstProduit" => $rapport->getMedDepotLegal1(),
+				"secondProduit" => $rapport->getMedDepotLegal2(),
+				"echantillons" => array(),
+			);
+
+			//inclusion de la page d'affichage
+			require "View/Visite/FormulaireVisite.inc.php";
+		}
+		break;
+
 	default:
 		$title = "Rapport de visite";
 		if($_SESSION['user']->getRole() == 0){
 			$rapports = RapportVisiteManager::getLstRapport();
-			$rapports = array();
 
 		} else if ($_SESSION['user']->getRole() == 1) {
-//			$equipe = EquipeManager::getEquipe($_SESSION['user']->get
-			$rapports = array();
+			$equipe = EquipeManager::getEquipe($_SESSION['user']->getNum());
+			$rapports = EquipeManager::getLstRapportEquipe($equipe);
 		} else {
 			$rapports = UtilisateurManager::getLstRapportByUtilisateurId($_SESSION['user']);
 		}
