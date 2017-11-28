@@ -75,15 +75,16 @@ switch ($action){
 		require "View/Visite/FormulaireVisite.inc.php";
 		break;
 
+
 	case "modify":
 		//variables
 		$medecins = MedecinManager::getLstMedecin();
 		$produits = ProduitManager::getLstProduit();
 		$title = "Modifier une visite";
 		$modification = true;
-
+		$visite = RapportVisiteManager::getRapportById($_GET['id']);
 		//vérification des champs
-		if(isset($_POST['modifier'])){
+		if(isset($_POST['Modifier'])){
 			if(isset($_GET['num']) && !empty($_GET['num'])
 			   	&& isset($_POST['medecin']) && !empty($_POST['medecin'])
 			   	&& isset($_POST['remplacant']) && !empty($_POST['remplacant'])
@@ -112,17 +113,17 @@ switch ($action){
 		}
 
 		$data = array(
-					"num" => (!empty($_POST['num'])) ? $_POST['num'] : null,
-					"date" => (!empty($_POST['date'])) ? $_POST['date'] : null,
-					"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : null,
-					"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : null,
-					"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : null,
+					"num" => (!empty($_POST['num'])) ? $_POST['num'] : $visite->getRapNum(),
+					"date" => (!empty($_POST['date'])) ? $_POST['date'] : $visite->getRapDate(),
+					"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : $visite->getPraCode(),
+					"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : $visite->getRapMotif(),
+					"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : $visite->getRempCode(),
 					"autre" => (!empty($_POST['autre'])) ? $_POST['autre'] : null,
-					"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : null,
-					"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : null,
-					"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : null,
+					"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : $visite->getRapBilan(),
+					"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : $visite->getMedDepotLegal1(),
+					"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : $visite->getMedDepotLegal2(),
 					"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
-					"echantillons" => null,
+					"echantillons" => $visite->getEchantillon()
 				);
 
         require "View/Visite/FormulaireVisite.inc.php";
@@ -152,4 +153,7 @@ switch ($action){
 }
 
 fonctions::entete($title);
+
 ?>
+
+
