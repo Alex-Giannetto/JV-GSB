@@ -75,7 +75,7 @@ switch ($action){
 		require "View/Visite/FormulaireVisite.inc.php";
 		break;
 
-	case "modifier":
+	case "modify":
 		//variables
 		$medecins = MedecinManager::getLstMedecin();
 		$produits = ProduitManager::getLstProduit();
@@ -84,7 +84,7 @@ switch ($action){
 
 		//vérification des champs
 		if(isset($_POST['modifier'])){
-			if(isset($_POST['num']) && !empty($_POST['num'])
+			if(isset($_GET['num']) && !empty($_GET['num'])
 			   	&& isset($_POST['medecin']) && !empty($_POST['medecin'])
 			   	&& isset($_POST['remplacant']) && !empty($_POST['remplacant'])
 			   	&& isset($_POST['date']) && !empty($_POST['date'])
@@ -110,6 +110,21 @@ switch ($action){
 			RapportVisiteManager::updRapport($_POST['num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
 			RapportVisiteManager::updRapport($_POST['rapNum']);
 		}
+
+		$data = array(
+					"num" => (!empty($_POST['num'])) ? $_POST['num'] : null,
+					"date" => (!empty($_POST['date'])) ? $_POST['date'] : null,
+					"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : null,
+					"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : null,
+					"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : null,
+					"autre" => (!empty($_POST['autre'])) ? $_POST['autre'] : null,
+					"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : null,
+					"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : null,
+					"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : null,
+					"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
+					"echantillons" => null,
+				);
+
         require "View/Visite/FormulaireVisite.inc.php";
         break;
 
@@ -138,5 +153,3 @@ switch ($action){
 
 fonctions::entete($title);
 ?>
-
-
