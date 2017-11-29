@@ -12,16 +12,22 @@ class RapportVisiteManager
 {
 	// Ajoute un rapport de visite dans la base de donnée
 	public static function addRapport(RapportVisite $rapport){
-//		$query = MonPdo::getInstance()->prepare('INSERT INTO rapport_visite(praCode, rempCode, rapDate, rapBilan, rapMotif, 		medDepotLegal1, medDepotLegal2) VALUES(:praCode, :rempCode, :rapDate, :rapBilan, :rapMotif, :medDepLeg1, 					:medDepLeg2');
-//		$query ->execute(array(
-/*		'praCode' => $praCode,
-        'rempCode' => $rempCode,
-        'rapDate' => $rapDate,
-        'rapBilan' => $rapBilan,
-        'rapMotif' => $rapMotif,
-        'medDepotLegal1' => $medDepLeg1,
-        'medDepotLegal2' => $medDepLeg2))
- */
+
+		$query = MonPdo::getInstance()->prepare('INSERT INTO `rapport_visite`(`visiteurMatricule`, `praCode`, `rempCode`, `rapDate`, `rapBilan`, `rapMotif`, `medDepotLegal1`, `medDepotLegal2`, `doc`) '.
+			' VALUES (:visiteurMatricule, :praCode, :rempCode, :rapDate, :rapBilan, :rapMotif, :medDepotLegal1, :medDepotLegal2, :doc);');
+
+		$query->execute(array(
+			'visiteurMatricule' => $rapport->getVisiteurMatricule(),
+			'praCode' => $rapport->getPraCode(),
+			'rempCode' => $rapport->getRempCode(),
+			'rapDate' => $rapport->getRapDate(),
+			'rapBilan' => $rapport->getRapBilan(),
+			'rapMotif' => $rapport->getRapMotif(),
+			'medDepotLegal1' => $rapport->getMedDepotLegal1(),
+			'medDepotLegal2' => $rapport->getMedDepotLegal2(),
+			'doc' => $rapport->getDoc()
+			));
+
 	}
 
 	public static function getRapportById($id){

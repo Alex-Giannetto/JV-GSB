@@ -8,22 +8,8 @@
  */
 class RapportVisite
 {
-	protected $rapNum, $visiteurMatricule, $rempCode, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2;
+	protected $rapNum, $visiteurMatricule, $rempCode, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2, $doc;
 	protected $echantillon = [];
-
-	/**
-	 * RapportVisite constructor.
-	 * @param $rapNum
-	 * @param $visiteurMatricule
-	 * @param $rempCode
-	 * @param $praCode
-	 * @param $rapDate
-	 * @param $rapBilan
-	 * @param $rapMotif
-	 * @param $medDepotLegal1
-	 * @param $medDepotLegal2
-	 */
-
 
 	/**
 	 * RapportVisite constructor.
@@ -190,5 +176,23 @@ class RapportVisite
 			"quantite" => $quantite
 		);
 	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getDoc()
+	{
+		return $this->doc;
+	}
+
+	/**
+	 * @param mixed $doc
+	 */
+	public function setDoc($doc)
+	{
+		$this->doc = $doc;
+	}
+
+
 
 }

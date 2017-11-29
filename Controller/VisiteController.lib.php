@@ -17,21 +17,47 @@ switch ($action){
 		$title = "Ajouter une visite";
 		$modification = true;
 		// En cas de récupération de formulaire
-		if(isset($_POST['ajouter'])){
-			if(isset($_POST['num']) && !empty($_POST['num'])
-			   	&& isset($_POST['date']) && !empty($_POST['date'])
+		if(isset($_POST['submit'])){
+			$echantillons = array();
+			if(isset($_POST['nbEchantillons'])){
+				for ($i = 1; $i <=  $_POST['nbEchantillons']; $i++){
+					$indexPdt = 'pdt'.$i;
+					$indexQte = 'qte'.$i;
+
+					if(isset($_POST[$indexPdt]) && !empty($_POST[$indexPdt])){
+						echo $_POST[$indexPdt];
+						$echan = new Echantillon();
+						$echan->setMedDepotLegal($_POST[$indexPdt]);
+						$echan->setQuantite($_POST[$indexQte]);
+						$echantillons[] = $echan;
+					}
+				}
+			}
+
+			if(isset($_POST['date']) && !empty($_POST['date'])
 			   	&& isset($_POST['medecin']) && !empty($_POST['medecin'])
 			   	&& isset($_POST['motif']) && !empty($_POST['motif'])
 			   	&& isset($_POST['remplacant']) && !empty($_POST['remplacant'])
 			   	&& isset($_POST['bilan']) && !empty($_POST['bilan'])
 			   	&& isset($_POST['firstProduit']) && !empty($_POST['firstProduit'])
-			   	&& isset($_POST['secondProduit']) && !empty($_POST['secondProduit'])
-			   	&& isset($_POST['doc']) && !empty($_POST['doc'])){
+			   	&& isset($_POST['secondProduit']) && !empty($_POST['secondProduit'])){
 
 				if($_POST['remplacant'] != $_POST['medecin']){
 					if($_POST['motif'] != "AUT" || ($_POST['motif'] == "AUT" && !empty($_POST['autre']))){
 						$message = [1, "Réussi !"];
-						var_dump($message);
+						$rapport = new RapportVisite();
+						$rapport->setVisiteurMatricule($_SESSION['user']->getNum());
+						$rapport->setRapDate($_POST['date']);
+						$rapport->setPraCode($_POST['medecin']);
+						$rapport->setRapBilan($_POST['bilan']);
+						$rapport->setRapMotif(($_POST['motif'] == "AUT")? $_POST["autre"] : $_POST['motif']);
+						$rapport->setRempCode($_POST['remplacant']);
+						$rapport->setMedDepotLegal1($_POST['firstProduit']);
+						$rapport->setMedDepotLegal2($_POST['secondProduit']);
+
+						RapportVisiteManager::addRapport($rapport);
+
+
 					} else {
 						$message = [0, "Veuillez remplir tout les champs"];
 					}
@@ -44,35 +70,25 @@ switch ($action){
 		}
 
 		if(isset($message) && $message[0] == 0){
-			$echantillons = array();
-			for ($i = 1; $i <= 10 ; $i++){
-				$indexPdt = 'pdt'.$i;
-				$indexQte = 'qte'.$i;
-				if(isset($_POST[$indexPdt]) && !empty($_POST[$indexPdt]) && isset($_POST[$indexQte]) && !empty($_POST[$indexQte])){
-					$echantillons[] = array(
-						"medDepotLegal" => $_POST[$indexPdt],
-						"quantite" => $_POST[$indexQte]
-					);
-				}
 
-				$data = array(
-					"num" => (!empty($_POST['num'])) ? $_POST['num'] : null,
-					"date" => (!empty($_POST['date'])) ? $_POST['date'] : null,
-					"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : null,
-					"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : null,
-					"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : null,
-					"autre" => (!empty($_POST['autre'])) ? $_POST['autre'] : null,
-					"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : null,
-					"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : null,
-					"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : null,
-					"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
-					"echantillons" => $echantillons,
-				);
-			}
+			$data = array(
+				"num" => (!empty($_POST['num'])) ? $_POST['num'] : null,
+				"date" => (!empty($_POST['date'])) ? $_POST['date'] : null,
+				"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : null,
+				"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : null,
+				"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : null,
+				"autre" => (!empty($_POST['autre'])) ? $_POST['autre'] : null,
+				"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : null,
+				"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : null,
+				"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : null,
+				"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
+				"echantillons" => $echantillons,
+			);
 
 		}
 		//inclusion de la page d'affichage
 		require "View/Visite/FormulaireVisite.inc.php";
+		var_dump($rapport);
 		break;
 
 	case "modify":
@@ -92,7 +108,6 @@ switch ($action){
 			   	&& isset($_POST['remplacant']) && !empty($_POST['remplacant'])
 			   	&& isset($_POST['date']) && !empty($_POST['date'])
 			   	&& isset($_POST['bilan']) && !empty($_POST['bilan'])
-			   	&& isset($_POST['motif']) && !empty($_POST['motif'])
 			   	&& isset($_POST['firstProduit']) && !empty($_POST['firstProduit'])
 			   	&& isset($_POST['secondProduit']) && !empty($_POST['secondProduit'])
 			   	&& isset($_POST['doc']) && !empty($_POST['doc'])){
@@ -115,18 +130,20 @@ switch ($action){
 		}
 
 
+
+		$echantillons = EchantillonManager::getLstEchantillonVisite($visite);
+
 		$data = array(
 					"num" => (!empty($_POST['num'])) ? $_POST['num'] : $visite->getRapNum(),
 					"date" => (!empty($_POST['date'])) ? $_POST['date'] : $visite->getRapDate(),
 					"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : $visite->getPraCode(),
 					"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : $visite->getRapMotif(),
 					"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : $visite->getRempCode(),
-					"autre" => (!empty($_POST['autre'])) ? $_POST['autre'] : null,
 					"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : $visite->getRapBilan(),
 					"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : $visite->getMedDepotLegal1(),
 					"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : $visite->getMedDepotLegal2(),
 					"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
-					"echantillons" => $visite->getEchantillon()
+					"echantillons" => $echantillons
 				);
 
 
@@ -146,11 +163,13 @@ switch ($action){
 
 			$medecins = array();
 			$produits = array();
-			$title = "💩💩💩💩💩💩💩";
 			$modification = false;
 
 			$rapport = RapportVisiteManager::getRapportById($_GET['id']);
 
+			$echantillons = EchantillonManager::getLstEchantillonVisite($rapport);
+
+			$title = "Visite n°".$rapport->getRapNum();
 
 			$data = array(
 				"num" => $rapport->getRapNum(),
@@ -161,7 +180,8 @@ switch ($action){
 				"bilan" => $rapport->getRapBilan(),
 				"firstProduit" => $rapport->getMedDepotLegal1(),
 				"secondProduit" => $rapport->getMedDepotLegal2(),
-				"echantillons" => array(),
+				"doc" => $rapport->getDoc(),
+				"echantillons" => $echantillons
 			);
 
 			//inclusion de la page d'affichage
