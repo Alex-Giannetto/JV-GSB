@@ -1,11 +1,11 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 20/11/2017
- * Time: 14:13
+ * Définition d'un utilisateur
+ * GETTER / SETTER pour les valeurs d'un utilisateur
+ * @author Alexg78bis
+ * @package default
  */
+
 class Utilisateur
 {
 	protected $num, $nom, $prenom, $mail, $password, $role;

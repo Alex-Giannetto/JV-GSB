@@ -1,17 +1,17 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 22/11/2017
- * Time: 09:27
+ * Manager d'équipe
+ * Permet de récupérer une équipe et d'obtenir tout leurs rapport
+ * @author Alexg78bis
+ * @package default
  */
+
 class EquipeManager
 {
 	/**
+	 * Récupere une équipe avec ses utilisateurs
 	 * @param $numDelegue
 	 * @return Equipe
-	 * Récupere une équipe avec ses utilisateurs
 	 */
 	public static function getEquipe($numDelegue){
 		$query = MonPdo::getInstance()->prepare('Select * From equipe Where numDelegue = :num');
@@ -49,7 +49,11 @@ class EquipeManager
 		return $equipe;
 	}
 
-
+	/**
+	 * Récupérer tout les rapport d'une équipe
+	 * @param Equipe $equipe
+	 * @return mixed
+	 */
 	public static function getLstRapportEquipe(Equipe $equipe){
 
 		$query = MonPdo::getInstance()->prepare("SELECT rapport_visite.* FROM rapport_visite, utilisateur WHERE rapport_visite.visiteurMatricule = utilisateur.num AND ( utilisateur.num IN ( SELECT numUtilisateur FROM appartientequipe WHERE numEquipe = :numEquipe) OR visiteurMatricule = :visiteurMatricule)");

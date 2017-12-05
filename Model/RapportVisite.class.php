@@ -1,11 +1,11 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 13/11/2017
- * Time: 20:08
+ * Définition d'un rapport de visite
+ * GETTER / SETTER pour les valeurs d'un rapport de visite
+ * @author Alexg78bis
+ * @package default
  */
+
 class RapportVisite
 {
 	protected $rapNum, $visiteurMatricule, $rempCode, $praCode, $rapDate, $rapBilan, $rapMotif, $medDepotLegal1, $medDepotLegal2, $doc;

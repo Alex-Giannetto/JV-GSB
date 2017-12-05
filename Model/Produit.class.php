@@ -1,23 +1,17 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 13/11/2017
- * Time: 19:49
+ * Définition d'un produit
+ * GETTER / SETTER pour les valeurs d'un produit
+ * @author Alexg78bis
+ * @package default
  */
+
 class Produit
 {
 	protected $medDepotLegal, $libelle;
 
 	/**
-	 * Produit constructor.
-	 * @param $medDepotLegal
-	 * @param $libelle
-	 */
-
-	/**
-	 * Produit constructor.
+	 * Produit constructor. (vide)
 	 */
 	public function __construct()
 	{

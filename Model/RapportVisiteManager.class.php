@@ -1,16 +1,17 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 13/11/2017
- * Time: 20:16
+ * Manager des rapport de visite
+ * Permet de récupérer la liste / 1 rapport de visite et d'ajouter / mettre à jour ou supprimer un rapport
+ * @author Alexg78bis
+ * @package default
  */
-
 
 class RapportVisiteManager
 {
-	// Ajoute un rapport de visite dans la base de donnée
+	/**
+	 * Ajoute un rapport de visite dans la base de donnée
+	 * @param RapportVisite $rapport
+	 */
 	public static function addRapport(RapportVisite $rapport){
 
 		$query = MonPdo::getInstance()->prepare('INSERT INTO `rapport_visite`(`visiteurMatricule`, `praCode`, `rempCode`, `rapDate`, `rapBilan`, `rapMotif`, `medDepotLegal1`, `medDepotLegal2`, `doc`) '.
@@ -26,10 +27,15 @@ class RapportVisiteManager
 			'medDepotLegal1' => $rapport->getMedDepotLegal1(),
 			'medDepotLegal2' => $rapport->getMedDepotLegal2(),
 			'doc' => $rapport->getDoc()
-			));
+		));
 
 	}
 
+	/**
+	 * Retourne le rapport correspondant à l'id passé en paramètre
+	 * @param $id
+	 * @return RapportVisite
+	 */
 	public static function getRapportById($id){
 		$query = MonPdo::getInstance()->prepare('SELECT * FROM rapport_visite where rapNum = :id');
 		$query->execute(array('id' => $id));
@@ -37,13 +43,27 @@ class RapportVisiteManager
 		return (isset($result[0]))? $result[0] : new RapportVisite();
 	}
 
-
-	// Retourne la liste de tout les rapport de visite
+	/**
+	 * Retourne la liste de tout les rapport de visite
+	 * @return mixed
+	 */
 	public static function getLstRapport(){
 		$query = MonPdo::getInstance()->query('SELECT * FROM rapport_visite');
 		return $query->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'RapportVisite');
 	}
 
+	/**
+	 * Met à jour un rapport en fonction de son id
+	 * @param $rapNum
+	 * @param $praCode
+	 * @param $rempCode
+	 * @param $rapDate
+	 * @param $rapBilan
+	 * @param $rapMotif
+	 * @param $medDepLeg1
+	 * @param $medDepLeg2
+	 * @param $echantillons
+	 */
 	public static function updRapport($rapNum, $praCode, $rempCode, $rapDate, $rapBilan, $rapMotif, $medDepLeg1, $medDepLeg2, $echantillons)
 	{
 		$query = MonPdo::getInstance()->prepare('UPDATE rapport_visite SET praCode = :praCode, rempCode = :rempCode, rapDate = :rapDate, rapBilan = :rapBilan, rapMotif = :rapMotif, medDepotLegal1 = :medDepLeg1, medDepotLegal2 = :medDepLeg2 WHERE rapNum = ?');
@@ -56,18 +76,22 @@ class RapportVisiteManager
 			'medDepotLegal1' => $medDepLeg1,
 			'medDepotLegal2' => $medDepLeg2
 		]);
-        $req = MonPdo::getInstance()->prepare('UPDATE echantillons SET echantillons = :echantillons WHERE rapNum = ?');
-        $req->execute([
-            'echantillons' => $echantillons
-        ]);
+		$req = MonPdo::getInstance()->prepare('UPDATE echantillons SET echantillons = :echantillons WHERE rapNum = ?');
+		$req->execute([
+			'echantillons' => $echantillons
+		]);
 	}
 
+	/**
+	 * Supprime un rapport en fonction de son id
+	 * @param $id
+	 */
 	public static function delRapport($id)
-    {
-        $query = MonPdo::getInstance()->prepare('DELETE FROM echantillons WHERE rapNum = :rapNum');
-        $query->execute(array('rapNum' => $id));
-        $query = MonPdo::getInstance()->prepare('DELETE FROM rapport_visite WHERE rapNum = :rapNum');
-        $query->execute(array('rapNum' => $id));
+	{
+		$query = MonPdo::getInstance()->prepare('DELETE FROM echantillons WHERE rapNum = :rapNum');
+		$query->execute(array('rapNum' => $id));
+		$query = MonPdo::getInstance()->prepare('DELETE FROM rapport_visite WHERE rapNum = :rapNum');
+		$query->execute(array('rapNum' => $id));
 
-    }
+	}
 }

@@ -1,9 +1,9 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 13/11/2017
- * Time: 07:34
+ * Définition d'un médecin
+ * GETTER / SETTER pour les valeurs d'un médecin
+ * @author Alexg78bis
+ * @package default
  */
 class Medecin
 {

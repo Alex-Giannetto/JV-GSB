@@ -1,11 +1,12 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 22/11/2017
- * Time: 09:21
+ * Définition d'une équipe
+ * GETTER / SETTER pour les valeur d'une équipe + fonction pour ajouter des utilisateur dans
+ * l'équipe de facon local
+ * @author Alexg78bis
+ * @package default
  */
+
 class Equipe
 {
 	protected $id, $nom, $delegue, $lstUtilisateurs = array();

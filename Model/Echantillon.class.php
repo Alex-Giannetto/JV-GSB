@@ -1,11 +1,11 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 28/11/2017
- * Time: 08:52
+ * Définition d'un échantillon
+ * GETTER / SETTER pour les valeurs d'un échantillon
+ * @author Alexg78bis
+ * @package default
  */
+
 class Echantillon
 {
 	protected $echNum, $rapNum, $medDepotLegal, $quantite;
