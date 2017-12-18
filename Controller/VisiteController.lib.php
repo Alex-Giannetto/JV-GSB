@@ -1,24 +1,24 @@
 <link rel="stylesheet" href="css/visite.css">
-
 <?php
-/*
- * Created by PhpStorm.
- * User: alexg78bis
- * Date: 07/11/2017
- * Time: 22:43
+/**
+ * Controlleur pour la partie visite du site
+ * @author Alexg78bis
+ * @package default
  */
 
 $action = (isset($_REQUEST['action']))? $_REQUEST['action'] : "";
 switch ($action){
 	case "ajouter":
-		//variable
-		$medecins = MedecinManager::getLstMedecin();
-		$produits = ProduitManager::getLstProduit();
-		$title = "Ajouter une visite";
-		$modification = true;
+		//variable nécéssaire pour la vue
+		$medecins = MedecinManager::getLstMedecin(); // liste des médecins qui seront affichés dans les listes déroulantes
+		$produits = ProduitManager::getLstProduit(); // liste des produits qui seront affichés dans les listes déroulantes
+		$title = "Ajouter une visite"; // titre de la page à affiché dans l'encadré
+		$modification = true; // activation des champs
+
 		// En cas de récupération de formulaire
 		if(isset($_POST['submit'])){
 			$echantillons = array();
+			// Nous allons récupérer tous les échantillons envoyé via le formulaire
 			if(isset($_POST['nbEchantillons'])){
 				for ($i = 1; $i <=  $_POST['nbEchantillons']; $i++){
 					$indexPdt = 'pdt'.$i;
@@ -57,7 +57,11 @@ switch ($action){
 
 						RapportVisiteManager::addRapport($rapport);
 
+						$id = MonPdo::getInstance()->query('select max(rapNum) from rapport_visite')->fetch();
 
+						foreach ($echantillons as $echantillon){
+							EchantillonManager::addEchantillon($echantillon, $id[0]);
+						}
 					} else {
 						$message = [0, "Veuillez remplir tout les champs"];
 					}
@@ -88,7 +92,6 @@ switch ($action){
 		}
 		//inclusion de la page d'affichage
 		require "View/Visite/FormulaireVisite.inc.php";
-		var_dump($rapport);
 		break;
 
 	case "modify":

@@ -180,7 +180,7 @@
 									</select>
 								</div>
 								<div style="display: inline-block; width: 20%">
-									<input type="number" class="form-control" min="1" value="1" style="padding-right: 0;">
+									<input type="number" name="qte1" class="form-control" min="1" value="1" style="padding-right: 0;">
 								</div>
 							</div>
 							<input type="hidden" name="nbEchantillons" id="nbEchantillons" value="1">

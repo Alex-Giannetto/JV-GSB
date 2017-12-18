@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="css/visite.css">
 
 <?php
-/*
- * Created by PhpStorm.
- * User: alexg78bis
- * Date: 16/11/2017
- * Time: 19:44
+/**
+ * Controlleur pour la partie administration du site
+ * Connexion / deconnexion des utilisateurs
+ * @author Alexg78bis
+ * @package default
  */
 
 $action = (isset($_REQUEST['action']))? $_REQUEST['action'] : "";
@@ -29,14 +29,18 @@ switch ($action){
 		break;
 
 	case "Deconnexion":
+		// En cas de déconnexion, on supprime la variable session et on redirige
+		// l'utilisateur sur l'index
 		$title = "";
 		session_destroy();
 		echo '<meta http-equiv="refresh" content="0; URL=index.php">';
 		break;
 
 	default:
+		//Par défaut, nous redirigeons sur l'index
 		$title = "";
 		echo '<meta http-equiv="refresh" content="0; URL=index.php">';
 		break;
 }
+
 fonctions::entete($title);
