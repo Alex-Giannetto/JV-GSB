@@ -64,21 +64,18 @@ class RapportVisiteManager
 	 * @param $medDepLeg2
 	 * @param $echantillons
 	 */
-	public static function updRapport($rapNum, $praCode, $rempCode, $rapDate, $rapBilan, $rapMotif, $medDepLeg1, $medDepLeg2, $echantillons)
+	public static function updRapport($rapNum, $praCode, $rempCode, $rapDate, $rapBilan, $rapMotif, $medDepLeg1, $medDepLeg2)
 	{
-		$query = MonPdo::getInstance()->prepare('UPDATE rapport_visite SET praCode = :praCode, rempCode = :rempCode, rapDate = :rapDate, rapBilan = :rapBilan, rapMotif = :rapMotif, medDepotLegal1 = :medDepLeg1, medDepotLegal2 = :medDepLeg2 WHERE rapNum = ?');
+		$query = MonPdo::getInstance()->prepare('UPDATE rapport_visite SET praCode = :praCode, rempCode = :rempCode, rapDate = :rapDate, rapBilan = :rapBilan, rapMotif = :rapMotif, medDepotLegal1 = :medDepLeg1, medDepotLegal2 = :medDepLeg2 WHERE rapNum = :rapNum');
 		$query->execute([
 			'praCode'        => $praCode,
 			'rempCode'       => $rempCode,
 			'rapDate'        => $rapDate,
 			'rapBilan'       => $rapBilan,
 			'rapMotif'       => $rapMotif,
-			'medDepotLegal1' => $medDepLeg1,
-			'medDepotLegal2' => $medDepLeg2
-		]);
-		$req = MonPdo::getInstance()->prepare('UPDATE echantillons SET echantillons = :echantillons WHERE rapNum = ?');
-		$req->execute([
-			'echantillons' => $echantillons
+			'medDepLeg1' => $medDepLeg1,
+			'medDepLeg2' => $medDepLeg2,
+            'rapNum'         => $rapNum
 		]);
 	}
 

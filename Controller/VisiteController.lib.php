@@ -94,61 +94,78 @@ switch ($action){
 		require "View/Visite/FormulaireVisite.inc.php";
 		break;
 
-	case "modify":
-
-		//variables
-		$medecins = MedecinManager::getLstMedecin();
-		$produits = ProduitManager::getLstProduit();
-		$title = "Modifier une visite";
-		$modification = true;
-		$visite = RapportVisiteManager::getRapportById($_GET['id']);
-		//vérification des champs
-
-		if(isset($_POST['modifier'])){
-			if(isset($_POST['num']) && !empty($_POST['num'])
-
-			   	&& isset($_POST['medecin']) && !empty($_POST['medecin'])
-			   	&& isset($_POST['remplacant']) && !empty($_POST['remplacant'])
-			   	&& isset($_POST['date']) && !empty($_POST['date'])
-			   	&& isset($_POST['bilan']) && !empty($_POST['bilan'])
-			   	&& isset($_POST['firstProduit']) && !empty($_POST['firstProduit'])
-			   	&& isset($_POST['secondProduit']) && !empty($_POST['secondProduit'])
-			   	&& isset($_POST['doc']) && !empty($_POST['doc'])){
-
-				if($_POST['remplacant'] != $_POST['medecin']){
-					if($_POST['motif'] != "AUT" || ($_POST['motif'] == "AUT" && !empty($_POST['autre']))){
-						$message = [1, "Modification effectuée"];
-						var_dump($message);
-					} else {
-						$message = [0, "Veuillez remplir tout les champs"];
-					}
-				} else {
-					$message = [0, "Le médecin ne peux être le même que le remplaçant"];
-				}
-			} else {
-				$message = [0, "Veuillez remplir tout les champs"];
-			}
-			RapportVisiteManager::updRapport($_POST['num'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
-			RapportVisiteManager::updRapport($_POST['rapNum']);
-		}
+    case "modify":
+        $medecins = MedecinManager::getLstMedecin();
+        $produits = ProduitManager::getLstProduit();
+        $title = "Modifier une visite";
+        $modification = true;
+        $visite = RapportVisiteManager::getRapportById($_GET['id']);
 
 
+        $echantillons = array();
+        // Nous allons récupérer tous les échantillons envoyé via le formulaire
+        if(isset($_POST['nbEchantillons'])){
+            for ($i = 1; $i <=  $_POST['nbEchantillons']; $i++){
+                $indexPdt = 'pdt'.$i;
+                $indexQte = 'qte'.$i;
 
-		$echantillons = EchantillonManager::getLstEchantillonVisite($visite);
+                if(isset($_POST[$indexPdt]) && !empty($_POST[$indexPdt])){
+                    echo $_POST[$indexPdt];
+                    $echan = new Echantillon();
+                    $echan->setMedDepotLegal($_POST[$indexPdt]);
+                    $echan->setQuantite($_POST[$indexQte]);
+                    $echantillons[] = $echan;
+                }
+            }
+        }
 
-		$data = array(
-					"num" => (!empty($_POST['num'])) ? $_POST['num'] : $visite->getRapNum(),
-					"date" => (!empty($_POST['date'])) ? $_POST['date'] : $visite->getRapDate(),
-					"medecin" => (!empty($_POST['medecin'])) ? $_POST['medecin'] : $visite->getPraCode(),
-					"motif" => (!empty($_POST['motif'])) ? $_POST['motif'] : $visite->getRapMotif(),
-					"remplacant" => (!empty($_POST['remplacant'])) ? $_POST['remplacant'] : $visite->getRempCode(),
-					"bilan" => (!empty($_POST['bilan'])) ? $_POST['bilan'] : $visite->getRapBilan(),
-					"firstProduit" => (!empty($_POST['firstProduit'])) ? $_POST['firstProduit'] : $visite->getMedDepotLegal1(),
-					"secondProduit" => (!empty($_POST['secondProduit'])) ? $_POST['secondProduit'] : $visite->getMedDepotLegal2(),
-					"doc" => (!empty($_POST['doc'])) ? $_POST['doc'] : null,
-					"echantillons" => $echantillons
-				);
 
+        if(isset($_POST['submit'])){
+            if(isset($_POST['date']) && !empty($_POST['date'])
+                && isset($_POST['medecin']) && !empty($_POST['medecin'])
+                && isset($_POST['motif']) && !empty($_POST['motif'])
+                && isset($_POST['remplacant']) && !empty($_POST['remplacant'])
+                && isset($_POST['bilan']) && !empty($_POST['bilan'])
+                && isset($_POST['firstProduit']) && !empty($_POST['firstProduit'])
+                && isset($_POST['secondProduit']) && !empty($_POST['secondProduit'])){
+
+                if($_POST['remplacant'] != $_POST['medecin']){
+                    if($_POST['motif'] != "AUT" || ($_POST['motif'] == "AUT" && !empty($_POST['autre']))){
+                        $message = [1, "Réussi !"];
+
+                        RapportVisiteManager::updRapport($_GET['id'], $_POST['medecin'], $_POST['remplacant'], $_POST['date'], $_POST['bilan'], $_POST['motif'], $_POST['firstProduit'], $_POST['secondProduit']);
+
+
+                        EchantillonManager::deleteEchantillonsVisite($_GET['id']);
+
+                        foreach ($echantillons as $echantillon){
+                            EchantillonManager::addEchantillon($echantillon, $_GET['id']);
+                        }
+                    } else {
+                        $message = [0, "Veuillez remplir tout les champs"];
+                    }
+                } else {
+                    $message = [0, "Le médecin ne peux être le même que le remplaçant"];
+                }
+            } else {
+                $message = [0, "Veuillez remplir tout les champs"];
+            }
+        }
+
+        $echantillons = EchantillonManager::getLstEchantillonVisite($visite);
+
+        $data = array(
+            "num" => (isset($_POST['num'])) ? $_POST['num'] : $visite->getRapNum(),
+            "date" => (isset($_POST['date'])) ? $_POST['date'] : $visite->getRapDate(),
+            "medecin" => (isset($_POST['medecin'])) ? $_POST['medecin'] : $visite->getPraCode(),
+            "motif" => (isset($_POST['motif'])) ? $_POST['motif'] : $visite->getRapMotif(),
+            "remplacant" => (isset($_POST['remplacant'])) ? $_POST['remplacant'] : $visite->getRempCode(),
+            "bilan" => (isset($_POST['bilan'])) ? $_POST['bilan'] : $visite->getRapBilan(),
+            "firstProduit" => (isset($_POST['firstProduit'])) ? $_POST['firstProduit'] : $visite->getMedDepotLegal1(),
+            "secondProduit" => (isset($_POST['secondProduit'])) ? $_POST['secondProduit'] : $visite->getMedDepotLegal2(),
+            "doc" => (isset($_POST['doc'])) ? $_POST['doc'] : null,
+            "echantillons" => $echantillons
+        );
 
         require "View/Visite/FormulaireVisite.inc.php";
         break;

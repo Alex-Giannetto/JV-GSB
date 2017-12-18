@@ -10,8 +10,9 @@
 	<div class="row">
 		<div class=" col-lg-3"></div>
 		<div class=" col-lg-6 bloc">
-			<form method='post' action="index.php?uc=visite&action=<?php echo $_GET['action']; ?>">
 
+            <!-- action="index.php?uc=visite&action=<?php // echo $_GET['action']; if(isset($_POST['id'])){ echo $_POST['id'];} ?>" -->
+			<form method='post' >
 				<fieldset <?php if(!$modification){ echo "disabled"; }?>>
 					<div class="row">
 						<div class="col-md-6 margin-bottom-2">
@@ -191,7 +192,7 @@
 					<div class="form-group text-center ">
 						<br>
 						<?php if($modification){ ?>
-							<input type="submit" class='btn btn-primary' name='submit'>
+							<input type="submit" class='btn btn-primary' name='submit' value="Valider">
 						<?php } ?>
 					</div>
 				</fieldset>

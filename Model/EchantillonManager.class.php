@@ -49,4 +49,12 @@ class EchantillonManager
 		));
 
 	}
+
+
+	public static function deleteEchantillonsVisite($raportId){
+        $query = MonPdo::getInstance()->prepare('DELETE FROM echantillons WHERE rapNum = :rapNum');
+        $query->execute(array("rapNum" => $raportId));
+    }
+
+
 }
