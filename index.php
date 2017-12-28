@@ -16,8 +16,8 @@ switch ($uc){
 		break;
 
 	default:
-		// inclure acceuil
-		break;
+        require "View/Home/home.inc.php";
+        break;
 		
 }
 

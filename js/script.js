@@ -1,8 +1,11 @@
 /**
- * Created by Alexg78bis on 22/11/2017.
+ * Fonction utile pour tout le site
+ * @author Alexandre Giannetto
+ * @package default
  */
-$(window).scroll(function() {
 
+// Fonction pour changer l'apparance de la bar de navigation lors du scroll
+$(window).scroll(function() {
     var scroll = $(window).scrollTop();
 
     if (scroll >= 150) {

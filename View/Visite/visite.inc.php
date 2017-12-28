@@ -11,7 +11,7 @@
 		<div class=" col-lg-2"></div>
 		<div class=" col-lg-8 bloc">
 			<div class="text-center margin-bottom-4">
-				<a href="index.php?uc=visite&action=ajouter"><input type="button" class="btn btn-outline-primary" value="Ajouter rapport"></a>
+				<a href="index.php?uc=visite&action=ajouter"><input type="button" class="btn btn-outline-primary" value="Ajouter un rapport"></a>
 			</div>
 			<table class="table table-hover table-striped text-center">
 				<thead>

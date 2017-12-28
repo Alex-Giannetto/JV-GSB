@@ -15,11 +15,16 @@ switch ($action){
 		$title = "Connexion";
 		// En cas de récupération du formulaire
 		if(isset($_POST['mail']) && isset($_POST['password'])){
+		    // On appel la fonction de conexion en lui passant une adresse mail et un mot de passe
+            // crypté en sha1
 			$result = UtilisateurManager::connexion($_POST['mail'], sha1($_POST['password']));
 			if($result){
+			    // si on obtient un résultat on attribu les information de l'utilisateur à
+                // la variable user de session
 				$_SESSION['user'] = $result;
 				echo '<meta http-equiv="refresh" content="0; URL=index.php">';
 			} else {
+			    // Sinon on retourne un message d'erreur
 				$message = array(0, "Connexion impossible");
 			}
 		}

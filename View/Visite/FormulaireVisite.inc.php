@@ -1,12 +1,15 @@
 <div class="container firstContainer">
+
+    <!-- Partie servant à afficher les messages -->
 	<?php if(isset($message)){ ?>
 		<div class="row">
 			<div class=" col-lg-3"></div>
-			<div class="alert-<?php if($message[0] == 0){ echo "dander";} else { echo "success";} ?> alert col-lg-6">
+			<div class="alert-<?php if($message[0] == 0){ echo "danger";} else { echo "success";} ?> alert col-lg-6">
 				<?php echo $message[1] ?>
 			</div>
 		</div>
 	<?php } ?>
+
 	<div class="row">
 		<div class=" col-lg-3"></div>
 		<div class=" col-lg-6 bloc">
@@ -215,10 +218,10 @@
         }
     });
 
+    // Ajouter un champs pour saisir un échantillon
     $(document).ready(function() {
         var wrapper    = $("#echantillon"); //Fields wrapper
         var add_button = $(".add_field_button"); //Add button ID
-//        var x          = <?php //if(isset($data['echantillons'])){echo 10 - (count($data['echantillons'])-1);} else { echo 2; }?>//;
 	    var x = <?php if(isset($data['echantillons']) && !empty($data['echantillons'])){ echo count($data['echantillons']) + 1;} else { echo 2;} ?>;
 		var c = x;
         $(add_button).click(function(e){
