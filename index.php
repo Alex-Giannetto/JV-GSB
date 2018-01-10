@@ -14,10 +14,6 @@ switch ($uc){
 	case 'Administration':
 		require_once "Controller/AdministrationController.lib.php";
 		break;
-
-	default:
-        require "View/Home/home.inc.php";
-        break;
 		
 }
 
@@ -27,6 +23,11 @@ if(isset($_SESSION['user'])) {
 			require_once "Controller/VisiteController.lib.php";
 			break;
 	}
+}
+
+
+if($uc == 'acceuil'){
+    require "View/Home/home.inc.php";
 }
 
 

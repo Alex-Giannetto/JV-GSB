@@ -4,7 +4,7 @@
 /**
  * Controlleur pour la partie administration du site
  * Connexion / deconnexion des utilisateurs
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

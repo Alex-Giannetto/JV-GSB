@@ -2,7 +2,7 @@
 <?php
 /**
  * Controlleur pour la partie visite du site
- * @author Alexg78bis
+ * @author Alexandre Giannetto, Bryce Tavares, Adrien Stupnicki
  * @package default
  */
 
@@ -191,7 +191,6 @@ switch ($action){
         $title='';
         echo '<meta http-equiv="refresh" content="0; URL=index.php?uc=visite">';
         break;
-
 
 	case "view":
 		if(isset($_GET['id'])){
