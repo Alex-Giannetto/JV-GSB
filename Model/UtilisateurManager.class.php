@@ -2,7 +2,7 @@
 /**
  * Manager des utilisateur
  * GETTER / SETTER pour les valeurs d'un échantillon
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

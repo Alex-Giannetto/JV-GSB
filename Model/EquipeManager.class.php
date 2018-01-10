@@ -2,7 +2,7 @@
 /**
  * Manager d'équipe
  * Permet de récupérer une équipe et d'obtenir tout leurs rapport
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

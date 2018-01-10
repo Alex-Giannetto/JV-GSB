@@ -3,10 +3,9 @@
  * Manager des echantillons
  * Permet de récupérer la liste de tout les échantillons, d'en ajouter un
  * ou encore d'en chercher un en particulier
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
-
 class EchantillonManager
 {
 

@@ -2,7 +2,7 @@
 /**
  * Définition d'un rapport de visite
  * GETTER / SETTER pour les valeurs d'un rapport de visite
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

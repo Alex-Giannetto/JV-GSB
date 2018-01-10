@@ -1,7 +1,7 @@
 <?php
 /**
  * Classe contenant plusieurs fonction de base
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

@@ -2,7 +2,7 @@
 /**
  * Définition d'un produit
  * GETTER / SETTER pour les valeurs d'un produit
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

@@ -3,7 +3,7 @@
  * Définition d'une équipe
  * GETTER / SETTER pour les valeur d'une équipe + fonction pour ajouter des utilisateur dans
  * l'équipe de facon local
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

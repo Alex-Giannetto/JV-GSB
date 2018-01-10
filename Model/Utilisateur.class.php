@@ -2,7 +2,7 @@
 /**
  * Définition d'un utilisateur
  * GETTER / SETTER pour les valeurs d'un utilisateur
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

@@ -2,7 +2,7 @@
 /**
  * Manager des rapport de visite
  * Permet de récupérer la liste / 1 rapport de visite et d'ajouter / mettre à jour ou supprimer un rapport
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 

@@ -1,3 +1,7 @@
+<!-- Pour chacun des champs des on regarde si on a la valeur du champ dans le tableau $data-->
+<!-- Dans ce cas là on remplit le champs avec cette valeur puis on fait un foreach pour afficher la liste de tous les medecins/médicament/… -->
+
+
 <div class="container firstContainer">
 
     <!-- Partie servant à afficher les messages -->

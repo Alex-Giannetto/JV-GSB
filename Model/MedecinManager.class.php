@@ -2,10 +2,9 @@
 /**
  * Manager des médecins
  * Permet de récupérer la liste des médecin ou 1 seul médecin
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
-
 class  MedecinManager
 {
 

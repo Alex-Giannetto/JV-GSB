@@ -2,10 +2,9 @@
 /**
  * Manager des produits
  * Permet de récupérer la liste des produits ou un produit précis
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
-
 class ProduitManager
 {
 	/**

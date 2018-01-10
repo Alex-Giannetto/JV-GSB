@@ -2,7 +2,7 @@
 /**
  * Définition d'un médecin
  * GETTER / SETTER pour les valeurs d'un médecin
- * @author Alexg78bis
+ * @author Alexandre Giannetto
  * @package default
  */
 class Medecin

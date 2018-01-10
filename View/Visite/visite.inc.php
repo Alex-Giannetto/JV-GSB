@@ -1,10 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Alexg78bis
- * Date: 22/11/2017
- * Time: 08:29
- */
+/*
+* @author Alexandre Giannetto
+* @package default
+*/
 ?>
 <div class="container firstContainer">
 	<div class="row">
